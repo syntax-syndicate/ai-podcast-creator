@@ -2,10 +2,10 @@
 
 This is an automated AI podcast website build with everything new in Next.js 14. It is bootstrapped with `create-t3-app`.
 
-[![AI Podcast](./public/og.ong)](https://iboughtbed-ai-podcast.vercel.app/)
+[![AI Podcast](./public/og.ong)](https://prllx.vercel.app/)
 
 > **Warning**
-> This project is still in development and is not ready for production use.
+> The project was discontinued as of 2024.
 
 ## Tech Stack
 
@@ -18,8 +18,7 @@ This is an automated AI podcast website build with everything new in Next.js 14.
 
 ## Features to be implemented
 
-<!-- - [ ] Authentication with **NextAuth** -->
-
+- [x] Authentication with **Clerk**
 - [x] ORM using **Drizzle ORM**
 - [x] PostgreSQL Database on **Supabase**
 - [x] Redis and QStash on **Upstash**
@@ -28,7 +27,7 @@ This is an automated AI podcast website build with everything new in Next.js 14.
 - [x] Script and branch generation with **ChatGPT**
 - [x] Text-to-speech with **ElevenLabs**
 - [x] Merging segment audios into final audio
-- [ ] Analyzing books and creating podcasts based on it
+- [x] Analyzing content and creating podcasts based on it
 - [ ] Add section for trending AI tools (for collaborations)
 
 ## Running Locally
