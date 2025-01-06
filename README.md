@@ -11,7 +11,7 @@ This is an automated AI podcast website build with everything new in Next.js 14.
 
 - **Framework:** [Next.js](https://nextjs.org)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com)
-- **User Management:** [NextAuth](https://next-auth.js.org)
+- **User Management:** [Clerk](https://clerk.com)
 - **ORM:** [Drizzle ORM](https://orm.drizzle.team)
 - **UI Components:** [shadcn/ui](https://ui.shadcn.com)
 - **File Uploads:** [uploadthing](https://uploadthing.com)
