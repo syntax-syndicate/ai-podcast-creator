@@ -16,7 +16,10 @@
         "UPLOADTHING_APP_ID",
         "DISCOVER_FEED_URL",
         "OPENAI_API_KEY",
-        "XI_API_KEY"
+        "XI_API_KEY",
+        "NEWS_FEED_URL",
+        "FINANCE_FEED_URL",
+        "CLERK_SECRET_KEY"
       ],
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
