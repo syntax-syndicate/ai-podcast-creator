@@ -6,19 +6,17 @@ import { toast } from "sonner";
 
 import { Icons } from "~/components/icons";
 import { cn } from "~/lib/utils";
+// import { createPodcast } from "~/server/actions/podcast";
 
 export function CreatePodcastForm() {
   // const router = useRouter();
   const [value, setValue] = React.useState("");
-  const [
-    isLoading,
-    // setIsLoading
-  ] = React.useState(false);
+  const [isLoading] = React.useState(false);
 
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
 
   async function onSubmit() {
-    return toast.info("Подкасты доступны для лимитированных пользователей.");
+    return toast.info("The project has been discontinued.");
 
     // try {
     //   setIsLoading(true);

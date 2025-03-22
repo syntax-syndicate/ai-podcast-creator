@@ -1,23 +1,29 @@
 import { PersonIcon } from "@radix-ui/react-icons";
-import { notFound } from "next/navigation";
+// import { notFound } from "next/navigation";
 
-import { clerkClient } from "~/server/auth";
-import { getPodcast } from "~/server/queries/podcast";
+// import { clerkClient } from "~/server/auth";
+// import { getPodcast } from "~/server/queries/podcast";
 
-export default async function PodcastPage({
-  params,
-}: {
-  params: { podcastId: string };
-}) {
-  const { data: podcast } = await getPodcast({ id: params.podcastId });
+export default async function PodcastPage(
+  {
+    // params,
+  }: {
+    params: { podcastId: string };
+  },
+) {
+  // const { data: podcast } = await getPodcast({ id: params.podcastId });
 
-  if (!podcast) {
-    notFound();
-  }
+  // if (!podcast) {
+  //   notFound();
+  // }
 
-  const user = await clerkClient.users.getUser(podcast.authorId);
+  // const user = await clerkClient.users.getUser(podcast.authorId);
 
   // fuck money, we for true art
+
+  const user = {
+    username: "iboughtbed",
+  };
 
   return (
     <div className="container">
@@ -38,14 +44,21 @@ export default async function PodcastPage({
               className="mt-3 animate-fade-up text-balance text-center text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]"
               style={{ animationDelay: "0.20s", animationFillMode: "both" }}
             >
-              {podcast.title}
+              The History of nFactorial Incubator
             </h1>
             <p
               className="mt-3 animate-fade-up text-balance text-center text-muted-foreground sm:text-lg"
               style={{ animationDelay: "0.30s", animationFillMode: "both" }}
             >
-              {podcast.description}
+              How one of the largest incubators in Central Asia was created.
             </p>
+          </div>
+        </div>
+        <div className="relative overflow-hidden pb-10 pt-8 md:pt-16">
+          <div className="mx-auto w-full max-w-3xl">
+            <audio controls className="w-full">
+              <source src="https://utfs.io/f/c86322d2-a90d-4a2c-a9c4-6f01305a2b57-a7qu6k" />
+            </audio>
           </div>
         </div>
       </div>

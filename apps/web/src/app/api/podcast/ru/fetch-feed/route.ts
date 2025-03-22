@@ -8,7 +8,7 @@ import type { FeedItem } from "~/types";
 function isValidDate(date: Date) {
   const today = new Date();
   const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
+  yesterday.setDate(yesterday.getDate() - 2);
 
   return (
     date.getDate() === today.getDate() || date.getDate() === yesterday.getDate()
@@ -59,6 +59,7 @@ async function fetchNews(url: string) {
       hrefs.push(href);
 
       const dateString = extractDate(href, origin);
+      console.log({ dateString });
       if (dateString) {
         const date = new Date(dateString);
         dates.push(date);
@@ -114,14 +115,21 @@ async function fetchNews(url: string) {
     items.push(item);
   }
 
+  console.log({ titles });
+
   return { items };
 }
 
 async function handler() {
   try {
     const { items: newsFeedItems } = await fetchNews(env.NEWS_FEED_URL);
-    const { items: financeFeedItems } = await fetchNews(env.FINANCE_FEED_URL);
-    const items = [...newsFeedItems, ...financeFeedItems];
+    // const { items: financeFeedItems } = await fetchNews(env.FINANCE_FEED_URL);
+    const items = [
+      ...newsFeedItems,
+      // ...financeFeedItems
+    ];
+
+    console.log({ items });
 
     await redis.json.set("ru:feed-items", "$", items);
 
