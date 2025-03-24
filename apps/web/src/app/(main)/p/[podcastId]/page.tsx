@@ -4,11 +4,13 @@ import { PersonIcon } from "@radix-ui/react-icons";
 // import { clerkClient } from "~/server/auth";
 // import { getPodcast } from "~/server/queries/podcast";
 
+type Params = { podcastId: string }
+
 export default async function PodcastPage(
   {
     // params,
   }: {
-    params: { podcastId: string };
+    params: Params;
   },
 ) {
   // const { data: podcast } = await getPodcast({ id: params.podcastId });
