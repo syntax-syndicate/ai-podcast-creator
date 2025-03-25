@@ -4,8 +4,8 @@ export default function page() {
 
 // import { notFound } from "next/navigation";
 
-// import { Separator } from "~/components/ui/separator";
-// import { getEpisode } from "~/server/queries/episode";
+// import { Separator } from "@/components/ui/separator";
+// import { getEpisode } from "@/server/queries/episode";
 
 // export default async function EpisodePage({
 //   params,

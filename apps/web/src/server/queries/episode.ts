@@ -1,6 +1,6 @@
 import "server-only";
 
-import { db } from "~/server/db";
+import { db } from "@/server/db";
 
 export async function getEpisode(id: string) {
   const episode = await db.query.episodes.findFirst({

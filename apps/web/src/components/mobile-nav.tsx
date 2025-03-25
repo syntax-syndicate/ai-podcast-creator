@@ -4,7 +4,7 @@ import Link, { type LinkProps } from "next/link";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 
-import { Button, buttonVariants } from "~/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Drawer,
   DrawerClose,
@@ -13,9 +13,9 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "~/components/ui/drawer";
-import { cn } from "~/lib/utils";
-import type { MainNavItem } from "~/types";
+} from "@/components/ui/drawer";
+import { cn } from "@/lib/utils";
+import type { MainNavItem } from "@/types";
 
 interface MobileNavProps {
   items: MainNavItem[];

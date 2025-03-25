@@ -2,11 +2,11 @@ import { UserButton } from "@clerk/nextjs";
 import type { User } from "@clerk/nextjs/server";
 import Link from "next/link";
 
-import { Icons } from "~/components/icons";
-import { MobileNav } from "~/components/mobile-nav";
-import { buttonVariants } from "~/components/ui/button";
-import { siteConfig } from "~/config/site";
-import { cn } from "~/lib/utils";
+import { Icons } from "@/components/icons";
+import { MobileNav } from "@/components/mobile-nav";
+import { buttonVariants } from "@/components/ui/button";
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 
 interface SiteHeaderProps {
   user: User | null;

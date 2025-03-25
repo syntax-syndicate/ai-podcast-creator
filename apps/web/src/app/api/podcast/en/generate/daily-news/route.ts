@@ -1,7 +1,7 @@
 import { verifySignatureAppRouter } from "@upstash/qstash/nextjs";
 
-import { queue } from "~/lib/qstash";
-import { absoluteUrl } from "~/lib/utils";
+import { queue } from "@/lib/qstash";
+import { absoluteUrl } from "@/lib/utils";
 
 async function handler() {
   try {

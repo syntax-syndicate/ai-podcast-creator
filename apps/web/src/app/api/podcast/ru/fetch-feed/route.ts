@@ -1,9 +1,9 @@
 import { verifySignatureAppRouter } from "@upstash/qstash/nextjs";
 import { load } from "cheerio";
 
-import { env } from "~/env";
-import { redis } from "~/lib/redis";
-import type { FeedItem } from "~/types";
+import { env } from "@/env";
+import { redis } from "@/lib/redis";
+import type { FeedItem } from "@/types";
 
 function isValidDate(date: Date) {
   const today = new Date();

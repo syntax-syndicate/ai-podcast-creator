@@ -4,9 +4,9 @@
 import * as React from "react";
 import { toast } from "sonner";
 
-import { Icons } from "~/components/icons";
-import { cn } from "~/lib/utils";
-// import { createPodcast } from "~/server/actions/podcast";
+import { Icons } from "@/components/icons";
+import { cn } from "@/lib/utils";
+// import { createPodcast } from "@/server/actions/podcast";
 
 export function CreatePodcastForm() {
   // const router = useRouter();

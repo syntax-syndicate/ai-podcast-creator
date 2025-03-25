@@ -1,4 +1,4 @@
-import type { FooterItem, MainNavItem } from "~/types";
+import type { FooterItem, MainNavItem } from "@/types";
 
 const links = {
   instagram: "https://instagram.com/prllx.podcast",

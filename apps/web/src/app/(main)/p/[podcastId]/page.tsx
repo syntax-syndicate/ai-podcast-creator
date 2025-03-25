@@ -1,8 +1,8 @@
 import { PersonIcon } from "@radix-ui/react-icons";
 // import { notFound } from "next/navigation";
 
-// import { clerkClient } from "~/server/auth";
-// import { getPodcast } from "~/server/queries/podcast";
+// import { clerkClient } from "@/server/auth";
+// import { getPodcast } from "@/server/queries/podcast";
 
 type Params = { podcastId: string }
 
