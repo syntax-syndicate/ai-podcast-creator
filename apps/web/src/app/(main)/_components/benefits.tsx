@@ -4,9 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { TypeAnimation } from "react-type-animation";
 
-import { Icons } from "~/components/icons";
-import { buttonVariants } from "~/components/ui/button";
-import { cn } from "~/lib/utils";
+import { Icons } from "@/components/icons";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export function Benefits() {
   return (

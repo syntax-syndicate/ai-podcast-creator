@@ -1,9 +1,9 @@
 import { verifySignatureAppRouter } from "@upstash/qstash/nextjs";
 
-import { queue } from "~/lib/qstash";
-import { redis } from "~/lib/redis";
-import { absoluteUrl } from "~/lib/utils";
-import type { PodcastScript } from "~/types";
+import { queue } from "@/lib/qstash";
+import { redis } from "@/lib/redis";
+import { absoluteUrl } from "@/lib/utils";
+import type { PodcastScript } from "@/types";
 
 async function handler() {
   try {

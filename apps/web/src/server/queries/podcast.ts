@@ -2,7 +2,7 @@ import "server-only";
 
 import { z } from "zod";
 
-import { db } from "~/server/db";
+import { db } from "@/server/db";
 
 const getPodcastSchema = z.object({
   id: z.string(),

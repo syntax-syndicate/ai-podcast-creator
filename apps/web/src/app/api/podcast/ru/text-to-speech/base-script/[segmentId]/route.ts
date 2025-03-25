@@ -1,11 +1,11 @@
 import { verifySignatureAppRouter } from "@upstash/qstash/nextjs";
 
-import { env } from "~/env";
-import { ruHostsVoices } from "~/lib/constants";
-import { redis } from "~/lib/redis";
-import { generateId } from "~/lib/utils";
-import { utapi } from "~/server/uploadthing";
-import type { PodcastSegment } from "~/types";
+import { env } from "@/env";
+import { ruHostsVoices } from "@/lib/constants";
+import { redis } from "@/lib/redis";
+import { generateId } from "@/lib/utils";
+import { utapi } from "@/server/uploadthing";
+import type { PodcastSegment } from "@/types";
 
 type PodcastSegmentWithIdx = PodcastSegment & {
   index: number;

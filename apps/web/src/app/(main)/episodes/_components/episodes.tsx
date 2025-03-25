@@ -1,4 +1,4 @@
-import type { Episode } from "~/server/db/schema";
+import type { Episode } from "@/server/db/schema";
 import { EpisodeCard } from "./episode-card";
 
 interface EpisodesProps {

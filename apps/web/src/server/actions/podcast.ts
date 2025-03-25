@@ -3,9 +3,9 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { z } from "zod";
 
-import { openai } from "~/lib/openai";
-import { db } from "~/server/db";
-import { podcasts } from "~/server/db/schema";
+import { openai } from "@/lib/openai";
+import { db } from "@/server/db";
+import { podcasts } from "@/server/db/schema";
 
 const createPodcastSchema = z.object({
   prompt: z.string().min(2).max(1000),

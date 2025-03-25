@@ -3,9 +3,9 @@
 import Image from "next/image";
 import * as React from "react";
 
-import { Icons } from "~/components/icons";
-import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs";
-import { cn } from "~/lib/utils";
+import { Icons } from "@/components/icons";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
 
 export function PodcastTabs() {
   const [tab, setTab] = React.useState("apple");

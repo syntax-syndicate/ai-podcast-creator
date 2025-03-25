@@ -1,16 +1,16 @@
-import "~/styles/globals.css";
+import "@/styles/globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata, Viewport } from "next";
 
-import { Analytics } from "~/components/analytics";
-import { ThemeProvider } from "~/components/providers";
-// import { SmoothScroll } from "~/components/smooth-scroll";
-import { TailwindIndicator } from "~/components/tailwind-indicator";
-import { Toaster as Sonner } from "~/components/ui/sonner";
-import { siteConfig } from "~/config/site";
-import { fontMono, fontSans } from "~/lib/fonts";
-import { cn } from "~/lib/utils";
+import { Analytics } from "@/components/analytics";
+import { ThemeProvider } from "@/components/providers";
+// import { SmoothScroll } from "@/components/smooth-scroll";
+import { TailwindIndicator } from "@/components/tailwind-indicator";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { siteConfig } from "@/config/site";
+import { fontMono, fontSans } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: {

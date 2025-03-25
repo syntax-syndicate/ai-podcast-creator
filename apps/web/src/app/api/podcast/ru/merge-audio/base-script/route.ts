@@ -1,11 +1,11 @@
 import { verifySignatureAppRouter } from "@upstash/qstash/nextjs";
 
-import { redis } from "~/lib/redis";
-import { generateId, getFormattedDate } from "~/lib/utils";
-import { db } from "~/server/db";
-import { episodes } from "~/server/db/schema";
-import { utapi } from "~/server/uploadthing";
-import type { PodcastScript } from "~/types";
+import { redis } from "@/lib/redis";
+import { generateId, getFormattedDate } from "@/lib/utils";
+import { db } from "@/server/db";
+import { episodes } from "@/server/db/schema";
+import { utapi } from "@/server/uploadthing";
+import type { PodcastScript } from "@/types";
 
 export const maxDuration = 60;
 

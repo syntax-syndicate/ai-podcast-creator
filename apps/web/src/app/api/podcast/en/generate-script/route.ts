@@ -1,11 +1,11 @@
 import { verifySignatureAppRouter } from "@upstash/qstash/nextjs";
 
-import { GENERATE_SCRIPT_SYSTEM_PROMPT_EN } from "~/lib/constants";
-import { openai } from "~/lib/openai";
-import { queue } from "~/lib/qstash";
-import { redis } from "~/lib/redis";
-import { absoluteUrl } from "~/lib/utils";
-import type { FeedItem, PodcastScript } from "~/types";
+import { GENERATE_SCRIPT_SYSTEM_PROMPT_EN } from "@/lib/constants";
+import { openai } from "@/lib/openai";
+import { queue } from "@/lib/qstash";
+import { redis } from "@/lib/redis";
+import { absoluteUrl } from "@/lib/utils";
+import type { FeedItem, PodcastScript } from "@/types";
 
 export const maxDuration = 20;
 

@@ -2,7 +2,7 @@ import { createClerkClient } from "@clerk/backend";
 import { currentUser } from "@clerk/nextjs/server";
 import { cache } from "react";
 
-import { env } from "~/env";
+import { env } from "@/env";
 
 export const getCachedUser = cache(currentUser);
 

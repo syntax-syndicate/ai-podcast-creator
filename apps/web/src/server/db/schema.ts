@@ -7,9 +7,9 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
-import { episodeLanguages } from "~/lib/constants";
-import { generateId } from "~/lib/utils";
-import type { PodcastSegment } from "~/types";
+import { episodeLanguages } from "@/lib/constants";
+import { generateId } from "@/lib/utils";
+import type { PodcastSegment } from "@/types";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same

@@ -1,5 +1,5 @@
-import { Separator } from "~/components/ui/separator";
-// import { getEpisodes } from "~/server/queries/episode";
+import { Separator } from "@/components/ui/separator";
+// import { getEpisodes } from "@/server/queries/episode";
 // import { Episodes } from "./_components/episodes";
 
 export default async function EpisodesPage() {

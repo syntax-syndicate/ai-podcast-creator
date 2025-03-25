@@ -2,12 +2,12 @@ import { ChevronRightIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Announcement } from "~/components/announcement";
-import { Icons } from "~/components/icons";
-import { buttonVariants } from "~/components/ui/button";
-import { Separator } from "~/components/ui/separator";
-import { testimonials } from "~/config/testimonials";
-import { cn } from "~/lib/utils";
+import { Announcement } from "@/components/announcement";
+import { Icons } from "@/components/icons";
+import { buttonVariants } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { testimonials } from "@/config/testimonials";
+import { cn } from "@/lib/utils";
 import { Benefits } from "./_components/benefits";
 import { PodcastTabs } from "./_components/podcast-tabs";
 
