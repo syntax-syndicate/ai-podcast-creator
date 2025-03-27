@@ -1,5 +1,8 @@
 "use client";
 
+import * as React from "react";
+import posthog from "posthog-js";
+import { PostHogProvider as PHProvider } from "posthog-js/react";
 import {
   ThemeProvider as NextThemesProvider,
   ThemeProviderProps,
@@ -13,4 +16,15 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
       <TooltipProvider>{children}</TooltipProvider>
     </NextThemesProvider>
   );
+}
+
+export function PostHogProvider({ children }: { children: React.ReactNode }) {
+  React.useEffect(() => {
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST!,
+      capture_pageview: false, // Disable automatic pageview capture, as we capture manually
+    });
+  }, []);
+
+  return <PHProvider client={posthog}>{children}</PHProvider>;
 }
