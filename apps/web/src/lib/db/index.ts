@@ -15,4 +15,8 @@ const globalForDb = globalThis as unknown as {
 const conn = globalForDb.conn ?? postgres(env.DATABASE_URL);
 if (env.NODE_ENV !== "production") globalForDb.conn = conn;
 
-export const db = drizzle(conn, { schema });
+/**
+ * Automatically map camelCase to snake_case in the database.
+ * @see https://orm.drizzle.team/docs/sql-schema-declaration#camel-and-snake-casing
+ */
+export const db = drizzle(conn, { schema, casing: "snake_case" });
