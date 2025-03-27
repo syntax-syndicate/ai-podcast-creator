@@ -5,7 +5,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata, Viewport } from "next";
 
 import { PostHogPageView } from "@/app/posthog-pageview";
-import { Analytics } from "@/components/analytics";
 import { ThemeProvider, PostHogProvider } from "@/components/providers";
 // import { SmoothScroll } from "@/components/smooth-scroll";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
@@ -90,7 +89,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
               disableTransitionOnChange
             >
               <div vaul-drawer-wrapper="">{children}</div>
-              <Analytics />
               {/* <SmoothScroll /> */}
               <TailwindIndicator />
               <Sonner richColors />
