@@ -1,10 +1,10 @@
 import { z } from "zod";
 
 export const defaultVoiceSettings = {
-  similarity_boost: 0.75,
+  similarity_boost: 0.70,
   stability: 0.5,
   style: 0,
-  use_speaker_boost: true,
+  use_speaker_boost: false,
   speed: 1,
   volume_gain: 0,
 };
