@@ -1,10 +1,12 @@
 import "@/styles/globals.css";
 
+import * as React from "react";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata, Viewport } from "next";
 
+import { PostHogPageView } from "@/app/posthog-pageview";
 import { Analytics } from "@/components/analytics";
-import { ThemeProvider } from "@/components/providers";
+import { ThemeProvider, PostHogProvider } from "@/components/providers";
 // import { SmoothScroll } from "@/components/smooth-scroll";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -77,18 +79,23 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontMono.variable,
           )}
         >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <div vaul-drawer-wrapper="">{children}</div>
-            <Analytics />
-            {/* <SmoothScroll /> */}
-            <TailwindIndicator />
-            <Sonner richColors />
-          </ThemeProvider>
+          <PostHogProvider>
+            <React.Suspense fallback={null}>
+              <PostHogPageView />
+            </React.Suspense>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <div vaul-drawer-wrapper="">{children}</div>
+              <Analytics />
+              {/* <SmoothScroll /> */}
+              <TailwindIndicator />
+              <Sonner richColors />
+            </ThemeProvider>
+          </PostHogProvider>
         </body>
       </html>
     </ClerkProvider>
