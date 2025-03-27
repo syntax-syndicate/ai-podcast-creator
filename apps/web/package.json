@@ -15,9 +15,11 @@
     "ui:add": "pnpm dlx shadcn@latest add"
   },
   "dependencies": {
-    "@clerk/backend": "^1.5.1",
-    "@clerk/nextjs": "^5.2.4",
-    "@clerk/types": "^4.9.0",
+    "@ai-sdk/google": "^1.2.3",
+    "@ai-sdk/react": "^1.2.2",
+    "@clerk/backend": "^1.25.6",
+    "@clerk/nextjs": "^6.12.10",
+    "@clerk/types": "^4.49.2",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-aspect-ratio": "^1.1.0",
     "@radix-ui/react-dialog": "^1.1.1",
@@ -32,6 +34,7 @@
     "@upstash/qstash": "^2.5.4",
     "@upstash/redis": "^1.31.6",
     "@vercel/analytics": "^1.3.1",
+    "ai": "^4.2.5",
     "cheerio": "1.0.0-rc.12",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -43,6 +46,7 @@
     "lucide-react": "^0.484.0",
     "nanoid": "^5.0.7",
     "next": "^15.2.3",
+    "next-safe-action": "^7.10.4",
     "next-themes": "^0.4.6",
     "openai": "^4.52.0",
     "postgres": "^3.4.4",
@@ -56,7 +60,7 @@
     "tailwindcss-animate": "^1.0.7",
     "uploadthing": "^6.12.0",
     "vaul": "^1.1.2",
-    "zod": "^3.23.8"
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/node": "^20",
