@@ -152,3 +152,40 @@ html {
   margin-left: -4rem;
   margin-right: -4rem;
 }
+
+.better-auth-outline-hover:hover {
+  box-shadow:
+    rgba(0, 0, 0, 0.28) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.11) 0px 0px 1px 0px;
+}
+
+.better-auth-provider-button-hover:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.better-auth-focus-no-outline:focus {
+  outline: none;
+}
+
+.better-auth-continue-button::after {
+  position: absolute;
+  content: "";
+  border-radius: inherit;
+  z-index: -1;
+  inset: 0px;
+  opacity: 1;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+  background: linear-gradient(rgba(255, 255, 255, 0.11) 0%, transparent 100%);
+}
+
+.better-auth-outline-focus:focus {
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+  box-shadow:
+    rgba(0, 0, 0, 0.07) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.08) 0px 2px 3px -1px,
+    rgba(0, 0, 0, 0.02) 0px 1px 0px 0px,
+    rgba(0, 0, 0, 0.15) 0px 0px 0px 4px;
+}

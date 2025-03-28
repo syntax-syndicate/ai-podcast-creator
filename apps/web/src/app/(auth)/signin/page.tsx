@@ -1,8 +1,8 @@
-import { SignIn } from "@clerk/nextjs";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
+import { SignIn } from "@/components/auth/sign-in";
 import { cn } from "@/lib/utils";
 
 export default function SignInPage() {
@@ -25,7 +25,7 @@ export default function SignInPage() {
           <h1 className="text-2xl font-semibold tracking-tight">
             Welcome back
           </h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Enter your email to sign in to your account
           </p>
         </div>

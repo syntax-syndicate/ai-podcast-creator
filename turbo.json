@@ -19,7 +19,14 @@
         "XI_API_KEY",
         "NEWS_FEED_URL",
         "FINANCE_FEED_URL",
-        "CLERK_SECRET_KEY"
+        "CLERK_SECRET_KEY",
+        "GOOGLE_GENERATIVE_AI_API_KEY",
+        "BETTER_AUTH_SECRET",
+        "BETTER_AUTH_URL",
+        "GITHUB_CLIENT_ID",
+        "GITHUB_CLIENT_SECRET",
+        "GOOGLE_CLIENT_ID",
+        "GOOGLE_CLIENT_SECRET"
       ],
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]

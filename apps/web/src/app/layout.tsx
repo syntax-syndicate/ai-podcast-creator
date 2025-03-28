@@ -1,7 +1,6 @@
 import "@/styles/globals.css";
 
 import * as React from "react";
-import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata, Viewport } from "next";
 
 import { PostHogPageView } from "@/app/posthog-pageview";
@@ -69,33 +68,31 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={cn(
-            "min-h-screen overflow-x-hidden font-sans antialiased",
-            fontSans.variable,
-            fontMono.variable,
-          )}
-        >
-          <PostHogProvider>
-            <React.Suspense fallback={null}>
-              <PostHogPageView />
-            </React.Suspense>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="light"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <div vaul-drawer-wrapper="">{children}</div>
-              {/* <SmoothScroll /> */}
-              <TailwindIndicator />
-              <Sonner richColors />
-            </ThemeProvider>
-          </PostHogProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={cn(
+          "min-h-screen overflow-x-hidden font-sans antialiased",
+          fontSans.variable,
+          fontMono.variable,
+        )}
+      >
+        <PostHogProvider>
+          <React.Suspense fallback={null}>
+            <PostHogPageView />
+          </React.Suspense>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div vaul-drawer-wrapper="">{children}</div>
+            {/* <SmoothScroll /> */}
+            <TailwindIndicator />
+            <Sonner richColors />
+          </ThemeProvider>
+        </PostHogProvider>
+      </body>
+    </html>
   );
 }
