@@ -8,9 +8,15 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:generate": "cd apps/web && pnpm run db:generate",
+    "db:migrate": "cd apps/web && pnpm run db:migrate",
+    "db:push": "cd apps/web && pnpm run db:push",
+    "db:studio": "cd apps/web && pnpm run db:studio",
+    "ui:add": "cd apps/web && pnpm run ui:add"
   },
   "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "turbo": "^2.4.4",

@@ -19,7 +19,7 @@ export function PodcastTabs() {
 
   return (
     <div
-      className="relative mb-4 animate-fade-up pb-10 pt-16"
+      className="animate-fade-up relative mb-4 pb-10 pt-16"
       style={{ animationDelay: "0.50s", animationFillMode: "both" }}
       id="episodes"
     >
@@ -35,7 +35,7 @@ export function PodcastTabs() {
 
       <div className="relative mx-auto flex flex-col items-center">
         <div className="w-full [perspective:800px]">
-          <div className="mx-auto min-h-[510px] max-w-4xl rounded-xl backdrop-blur-lg supports-[backdrop-filter]:bg-background/60">
+          <div className="supports-[backdrop-filter]:bg-background/60 mx-auto min-h-[510px] max-w-4xl rounded-xl backdrop-blur-lg">
             <Tabs
               defaultValue="apple"
               className="h-full w-full"
@@ -44,7 +44,7 @@ export function PodcastTabs() {
             >
               <TabsList className="mb-4 grid w-full grid-cols-2">
                 <TabsTrigger value="apple">
-                  <Icons.apple className="mr-2 size-4" />
+                  <Icons.applePodcasts className="mr-2 size-4" />
                   Apple Podcasts
                 </TabsTrigger>
                 <TabsTrigger value="spotify">
