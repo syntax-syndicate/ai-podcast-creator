@@ -3,12 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { TypeAnimation } from "react-type-animation";
+import { useTranslations } from "next-intl";
 
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function Benefits() {
+  const t = useTranslations("pages.home");
+
   return (
     <div className="relative mx-auto min-h-screen w-full max-w-5xl pb-10 pt-20 md:pt-40">
       <div className="mb-8 mr-auto max-w-4xl md:w-1/2">
@@ -20,23 +23,23 @@ export function Benefits() {
               className="pointer-events-none absolute bottom-[-10px] left-[-10px] hidden select-none md:block"
               fill
             />
-            Podcasts
+            {t("benefits.title.highlighted")}
           </span>{" "}
-          for everyone
+          {t("benefits.title.rest")}
         </h2>
-        <p className="text-balance text-xl font-medium text-muted-foreground">
-          Create, listen and enjoy our podcast and witness the future of
-          podcasts evolve.
+        <p className="text-muted-foreground text-balance text-xl font-medium">
+          {t("benefits.description")}
         </p>
       </div>
       <div className="flex flex-col gap-4 md:flex-row lg:gap-8">
         <div className="overflow-hidden rounded-xl border shadow-lg md:basis-3/5">
           <div className="p-8">
             <Icons.bot className="mb-4 size-6 text-violet-600" />
-            <h3 className="text-lg font-extrabold">AI-generated</h3>
-            <p className="mb-8 text-muted-foreground">
-              Seamlessly experience cutting-edge podcasting with our
-              AI-generated episodes.
+            <h3 className="text-lg font-extrabold">
+              {t("benefits.aiGenerated.title")}
+            </h3>
+            <p className="text-muted-foreground mb-8">
+              {t("benefits.aiGenerated.description")}
             </p>
             <Image
               src="/images/pink-arrow.png"
@@ -53,7 +56,7 @@ export function Benefits() {
                 {Array.from({ length: 3 }).map((_, i) => (
                   <div
                     key={i}
-                    className="mr-2 size-3 rounded-full bg-muted"
+                    className="bg-muted mr-2 size-3 rounded-full"
                   ></div>
                 ))}
               </div>
@@ -71,9 +74,11 @@ export function Benefits() {
             <div className="relative flex flex-col gap-8">
               <div className="rounded-xl border p-8 shadow-lg">
                 <Icons.rss className="mb-4 size-6 text-violet-600" />
-                <h3 className="mb-2 text-lg font-extrabold">Daily news</h3>
-                <p className="mb-8 text-muted-foreground">
-                  Daily news about digital business, science and culture.
+                <h3 className="mb-2 text-lg font-extrabold">
+                  {t("benefits.dailyNews.title")}
+                </h3>
+                <p className="text-muted-foreground mb-8">
+                  {t("benefits.dailyNews.description")}
                 </p>
                 <Link
                   href="/episodes"
@@ -82,22 +87,24 @@ export function Benefits() {
                     "w-full bg-violet-600 hover:bg-violet-600/90 dark:text-white",
                   )}
                 >
-                  Listen now
+                  {t("listenNow")}
                 </Link>
               </div>
 
               <div className="rounded-xl border p-8 shadow-lg">
                 <Icons.link className="mb-4 size-6 text-violet-600" />
-                <h3 className="mb-2 text-lg font-extrabold">Share links</h3>
-                <p className="mb-8 text-muted-foreground">
-                  Create your own podcasts and share it with your friends.
+                <h3 className="mb-2 text-lg font-extrabold">
+                  {t("benefits.shareLinks.title")}
+                </h3>
+                <p className="text-muted-foreground mb-8">
+                  {t("benefits.shareLinks.description")}
                 </p>
-                <div className="inline-flex w-full items-center justify-between rounded-md bg-muted px-2 py-1 text-sm">
+                <div className="bg-muted inline-flex w-full items-center justify-between rounded-md px-2 py-1 text-sm">
                   <div></div>
                   <div>prllx.studio/p/b7c29f</div>
                   <div>
                     <Link href="/p/b7c29f">
-                      <Icons.externalLink className="size-4 text-muted-foreground" />
+                      <Icons.externalLink className="text-muted-foreground size-4" />
                     </Link>
                   </div>
                 </div>
@@ -105,11 +112,13 @@ export function Benefits() {
 
               <div className="rounded-xl border bg-violet-600 p-8 text-white shadow-lg">
                 <Icons.terminal className="mb-4 size-6" />
-                <h3 className="mb-2 text-lg font-extrabold">Custom prompts</h3>
+                <h3 className="mb-2 text-lg font-extrabold">
+                  {t("benefits.customPrompts.title")}
+                </h3>
                 <p className="mb-8 text-white/80">
-                  Generate your own podcasts about anything you want.
+                  {t("benefits.customPrompts.description")}
                 </p>
-                <div className="inline-flex w-full items-center justify-between rounded-md bg-muted px-2 py-1 text-sm text-black">
+                <div className="bg-muted inline-flex w-full items-center justify-between rounded-md px-2 py-1 text-sm text-black">
                   <div></div>
                   <div className="flex-1">
                     <TypeAnimation
@@ -126,7 +135,7 @@ export function Benefits() {
                   </div>
                   <div>
                     <Link href="/create">
-                      <Icons.send className="size-4 text-muted-foreground" />
+                      <Icons.send className="text-muted-foreground size-4" />
                     </Link>
                   </div>
                 </div>

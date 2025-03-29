@@ -12,10 +12,10 @@ export const siteConfig = {
   description: "Daily Interactive AI Podcast",
   links,
   mainNav: [
-    { title: "Episodes", href: "/#episodes" },
-    { title: "Contact", href: "/" },
-    { title: "About", href: "/" },
-  ] satisfies MainNavItem[],
+    { key: "studio", href: "/" },
+    { key: "contact", href: "/" },
+    { key: "about", href: "/" },
+  ],
   footerNav: [
     {
       title: "Help",

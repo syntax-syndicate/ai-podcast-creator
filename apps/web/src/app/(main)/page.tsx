@@ -1,6 +1,7 @@
 import { ChevronRightIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import { Announcement } from "@/components/announcement";
 import { Icons } from "@/components/icons";
@@ -12,6 +13,8 @@ import { Benefits } from "./_components/benefits";
 import { PodcastTabs } from "./_components/podcast-tabs";
 
 export default function HomePage() {
+  const t = useTranslations("pages.home");
+
   return (
     <div className="container">
       <div className="flex flex-col">
@@ -23,26 +26,26 @@ export default function HomePage() {
               className="animate-fade-up mt-3 text-balance text-center text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]"
               style={{ animationDelay: "0.20s", animationFillMode: "both" }}
             >
-              AI-generated interactive podcast
+              {t("title")}
             </h1>
             <p
               className="animate-fade-up text-muted-foreground mt-3 max-w-xl text-balance text-center sm:text-lg"
               style={{ animationDelay: "0.30s", animationFillMode: "both" }}
             >
-              Shape the future of the podcast, by choosing your own story
+              {t("description")}
             </p>
             <div
               className="animate-fade-up mt-6 flex items-center gap-2"
               style={{ animationDelay: "0.40s", animationFillMode: "both" }}
             >
               <Link href="#episodes" className={cn(buttonVariants())}>
-                Listen now
+                {t("listenNow")}
               </Link>
               <Link
                 href="/create"
                 className={cn(buttonVariants({ variant: "outline" }))}
               >
-                Create now
+                {t("createNow")}
               </Link>
             </div>
           </div>
@@ -52,7 +55,7 @@ export default function HomePage() {
 
         <div className="mx-auto w-full max-w-3xl">
           <div className="text-center text-[15px] font-medium">
-            <div>Powering 100+ episodes on different services</div>
+            <div>{t("socialProof")}</div>
           </div>
           <div className="mt-4 flex items-center justify-center gap-2">
             <div className="bg-secondary ring-offset-background inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all">
@@ -73,13 +76,13 @@ export default function HomePage() {
         <div className="mx-auto mb-20 w-full max-w-5xl pb-10 pt-20">
           <div className="text-center">
             <h2 className="text-sm font-medium text-violet-500">
-              What people are saying
+              {t("testimonials.title")}
             </h2>
             <p className="mx-auto mt-4 max-w-md text-balance text-3xl font-semibold tracking-[-0.015rem] text-gray-950">
-              Trusted by podcasters, developers and directors
+              {t("testimonials.subtitle")}
             </p>
             <p className="mx-auto mt-4 max-w-xl text-base/6 text-gray-600">
-              Join the Parallax&apos;s fast growing community
+              {t("testimonials.description")}
             </p>
           </div>
 
@@ -292,14 +295,10 @@ export default function HomePage() {
           </div>
           <div className="rounded-xl border px-6 pb-14 pt-20 shadow-lg sm:px-10 sm:pb-20 lg:px-[4.5rem]">
             <h2 className="max-w-80 text-balance text-3xl font-semibold tracking-[-0.015rem] text-gray-950">
-              Start now,
-              <br />
-              shape the future of podcasts
+              {t("cta.title")}
             </h2>
             <p className="mt-4 max-w-[26rem] text-balance text-base/6 text-gray-600">
-              Create podcasts in minutes.{" "}
-              <strong className="font-medium lg:text-gray-950">Free</strong> for
-              your first 1 episode. No credit card required.
+              {t("cta.description")}
             </p>
             <div className="relative mt-6 flex items-center gap-2">
               <Link
@@ -309,7 +308,7 @@ export default function HomePage() {
                   "group bg-violet-600 font-bold hover:bg-violet-600/90 max-md:w-full dark:text-white",
                 )}
               >
-                <span>Listen now</span>
+                <span>{t("cta.primaryAction")}</span>
                 <ChevronRightIcon className="ml-1 size-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <Link
@@ -321,7 +320,7 @@ export default function HomePage() {
                   "max-md:w-full",
                 )}
               >
-                Get demo
+                {t("cta.secondaryAction")}
               </Link>
             </div>
           </div>
