@@ -5,7 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { SignUp } from "@/components/auth/sign-up";
 import { cn } from "@/lib/utils";
 
-export default function SignInPage() {
+export default function SignUpPage() {
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-center">
       <Link

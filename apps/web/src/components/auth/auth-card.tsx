@@ -52,7 +52,7 @@ export function AuthCard({
           <div className="m-auto flex flex-row flex-nowrap items-stretch justify-start gap-1 px-8 py-4">
             <span className="m-0 text-[0.8125rem] font-normal leading-snug tracking-normal text-[rgb(116,118,134)]">
               {type === "signin"
-                ? "Don&apos;t have an account?"
+                ? "Don't have an account?"
                 : "Already have an account?"}
             </span>
             <Link
