@@ -2,6 +2,8 @@ import "@/styles/globals.css";
 
 import * as React from "react";
 import type { Metadata, Viewport } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 
 import { PostHogPageView } from "@/app/posthog-pageview";
 import { ThemeProvider, PostHogProvider } from "@/components/providers";
@@ -66,9 +68,12 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen overflow-x-hidden font-sans antialiased",
@@ -86,10 +91,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
             enableSystem
             disableTransitionOnChange
           >
-            <div vaul-drawer-wrapper="">{children}</div>
-            {/* <SmoothScroll /> */}
-            <TailwindIndicator />
-            <Sonner richColors />
+            <NextIntlClientProvider messages={messages}>
+              <div vaul-drawer-wrapper="">{children}</div>
+              {/* <SmoothScroll /> */}
+              <TailwindIndicator />
+              <Sonner richColors />
+            </NextIntlClientProvider>
           </ThemeProvider>
         </PostHogProvider>
       </body>

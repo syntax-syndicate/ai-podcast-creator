@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import { Icons } from "@/components/icons";
 import { MobileNav } from "@/components/mobile-nav";
@@ -11,13 +12,20 @@ interface SiteHeaderProps {
 }
 
 export function SiteHeader({ user }: SiteHeaderProps) {
+  const t = useTranslations("navigation.header");
+
+  const items = siteConfig.mainNav.map((item) => ({
+    title: t(item.key),
+    href: item.href,
+  }));
+
   return (
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full py-5 backdrop-blur-lg">
       <div className="container relative flex h-8 items-center justify-between">
-        <MobileNav items={siteConfig.mainNav} />
+        <MobileNav items={items} />
 
         <div className="hidden items-center gap-2 text-sm md:flex">
-          {siteConfig.mainNav.map((item, index) => (
+          {items.map((item, index) => (
             <Link
               key={index}
               href={item.href}
@@ -64,7 +72,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                 "rounded-3xl text-sm",
               )}
             >
-              Sign In
+              {t("signIn")}
             </Link>
           )}
         </div>
