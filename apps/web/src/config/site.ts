@@ -7,8 +7,8 @@ const links = {
 
 export const siteConfig = {
   name: "Parallax Podcast",
-  url: "https://prllx.vercel.app",
-  ogImage: "https://prllx.vercel.app/og.png",
+  url: "https://prllxhq.com",
+  ogImage: "https://prllxhq.com/og.png",
   description: "Daily Interactive AI Podcast",
   links,
   mainNav: [

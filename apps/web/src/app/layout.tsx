@@ -21,7 +21,15 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(siteConfig.url),
   description: siteConfig.description,
-  keywords: ["Podcast", "AI Podcast", "Parallax Podcast"],
+  keywords: [
+    "Podcasts",
+    "AI Podcasts",
+    "Parallax Podcast",
+    "Parallax",
+    "Prllx",
+    "prllxhq",
+    "prllxhq.com",
+  ],
   authors: [
     {
       name: "iboughtbed",
