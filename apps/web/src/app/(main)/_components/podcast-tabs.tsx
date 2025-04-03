@@ -86,13 +86,13 @@ export function PodcastTabs() {
       </div>
 
       <div className="pointer-events-none absolute right-[-150px] top-[-18%] hidden select-none xl:block">
-        <Image
+        {/* <Image
           alt="floating faces with different expressions"
           src="/images/faces-right.png"
           className="aspect-[1160 / 490]"
           height="1160"
           width="490"
-        />
+        /> */}
       </div>
     </div>
   );
