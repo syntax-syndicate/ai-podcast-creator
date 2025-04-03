@@ -1,8 +1,8 @@
 {
   "common": {
     "announcement": {
-      "long": "Listen to the latest episode",
-      "short": "Latest episode"
+      "long": "Launching soon",
+      "short": "Launching soon"
     },
     "actions": {
       "logout": "Logout",
