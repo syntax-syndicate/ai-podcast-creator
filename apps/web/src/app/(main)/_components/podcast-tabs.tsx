@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+// import Image from "next/image";
 import * as React from "react";
 
 import { Icons } from "@/components/icons";
@@ -24,13 +24,13 @@ export function PodcastTabs() {
       id="episodes"
     >
       <div className="pointer-events-none absolute left-[-100px] top-[-10%] hidden select-none xl:block">
-        <Image
+        {/* <Image
           alt="floating faces with different expressions"
           src="/images/faces-left-cut.png"
           className="aspect-[1160 / 490]"
           height="1160"
           width="301"
-        />
+        /> */}
       </div>
 
       <div className="relative mx-auto flex flex-col items-center">
