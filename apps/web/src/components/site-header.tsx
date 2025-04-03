@@ -6,6 +6,8 @@ import { MobileNav } from "@/components/mobile-nav";
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
+import { ComingSoon } from "@/components/coming-soon";
 
 interface SiteHeaderProps {
   user: null;
@@ -20,7 +22,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
   }));
 
   return (
-    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full py-5 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 w-full bg-background/95 py-5 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60">
       <div className="container relative flex h-8 items-center justify-between">
         <MobileNav items={items} />
 
@@ -29,7 +31,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
             <Link
               key={index}
               href={item.href}
-              className="hover:bg-accent hover:text-accent-foreground flex items-center justify-center rounded-3xl border border-current px-3 py-1 font-medium transition-colors"
+              className="flex items-center justify-center rounded-3xl border border-current px-3 py-1 font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
             >
               {item.title}
             </Link>
@@ -48,7 +50,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
             href={siteConfig.links.instagram}
             target="_blank"
             rel="noreferrer"
-            className="hover:bg-accent hover:text-accent-foreground hidden items-center justify-center rounded-3xl border border-current px-3 py-1 font-medium transition-colors md:flex"
+            className="hidden items-center justify-center rounded-3xl border border-current px-3 py-1 font-medium transition-colors hover:bg-accent hover:text-accent-foreground md:flex"
           >
             Instagram
           </Link>
@@ -56,25 +58,11 @@ export function SiteHeader({ user }: SiteHeaderProps) {
             href={siteConfig.links.instagram}
             target="_blank"
             rel="noreferrer"
-            className="hover:bg-accent hover:text-accent-foreground hidden items-center justify-center rounded-3xl border border-current px-3 py-1 font-medium transition-colors md:flex"
+            className="hidden items-center justify-center rounded-3xl border border-current px-3 py-1 font-medium transition-colors hover:bg-accent hover:text-accent-foreground md:flex"
           >
             Email
           </Link>
-          {user ? (
-            <></>
-          ) : (
-            <Link
-              href="/signin"
-              className={cn(
-                buttonVariants({
-                  size: "sm",
-                }),
-                "rounded-3xl text-sm",
-              )}
-            >
-              {t("signIn")}
-            </Link>
-          )}
+          {user ? <></> : <ComingSoon />}
         </div>
       </div>
     </header>
