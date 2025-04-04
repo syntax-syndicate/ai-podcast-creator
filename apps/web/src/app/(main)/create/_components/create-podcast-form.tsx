@@ -36,7 +36,7 @@ export function CreatePodcastForm() {
       // }
 
       setIsLoading(false);
-      toast.success("Redirecting...");
+      toast.info("Launching soon...");
       // if (!data) {
       //   return toast.error("Error creating the podcast, please try again");
       // }
