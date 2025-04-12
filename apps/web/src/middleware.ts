@@ -1,7 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-// import { createAuthClient } from "better-auth/client";
-
-// const client = createAuthClient();
+// import { getSessionCookie } from "better-auth/cookies";
 
 // Private routes that require authentication
 // const protectedRoutes = ["/create(.*)"];
@@ -17,16 +15,19 @@ export async function middleware(request: NextRequest) {
 
   // For non-public routes, check authentication
   // if (isProtectedRoute) {
-  //   const { data: session } = await client.getSession({
-  //     fetchOptions: {
-  //       headers: {
-  //         cookie: request.headers.get("cookie") ?? "",
-  //       },
-  //     },
-  //   });
+    // const sessionCookie = getSessionCookie(request);
 
-  //   if (!session) {
+  //   if (!sessionCookie) {
   //     return NextResponse.redirect(new URL("/signin", request.url));
+  //   }
+  // }
+
+  // If authenticated, redirect to studio
+  // if (pathname === "/") {
+  //   const sessionCookie = getSessionCookie(request);
+
+  //   if (sessionCookie) {
+  //     return NextResponse.redirect(new URL("/studio", request.url));
   //   }
   // }
 

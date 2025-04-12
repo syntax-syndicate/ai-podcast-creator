@@ -13,6 +13,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { siteConfig } from "@/config/site";
 import { fontMono, fontSans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
+import { TRPCReactProvider } from "@/trpc/react";
 
 export const metadata: Metadata = {
   title: {
@@ -89,24 +90,26 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           fontMono.variable,
         )}
       >
-        <PostHogProvider>
-          <React.Suspense fallback={null}>
-            <PostHogPageView />
-          </React.Suspense>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <NextIntlClientProvider messages={messages}>
-              <div vaul-drawer-wrapper="">{children}</div>
-              {/* <SmoothScroll /> */}
-              <TailwindIndicator />
-              <Sonner richColors />
-            </NextIntlClientProvider>
-          </ThemeProvider>
-        </PostHogProvider>
+        <TRPCReactProvider>
+          <PostHogProvider>
+            <React.Suspense fallback={null}>
+              <PostHogPageView />
+            </React.Suspense>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <NextIntlClientProvider messages={messages}>
+                <div vaul-drawer-wrapper="">{children}</div>
+                {/* <SmoothScroll /> */}
+                <TailwindIndicator />
+                <Sonner richColors />
+              </NextIntlClientProvider>
+            </ThemeProvider>
+          </PostHogProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );

@@ -4,13 +4,13 @@ import { useTranslations } from "next-intl";
 import { Icons } from "@/components/icons";
 import { MobileNav } from "@/components/mobile-nav";
 import { buttonVariants } from "@/components/ui/button";
-import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
-import { toast } from "sonner";
 import { ComingSoon } from "@/components/coming-soon";
+import { siteConfig } from "@/config/site";
+import type { Session } from "@/lib/auth-types";
+import { cn } from "@/lib/utils";
 
 interface SiteHeaderProps {
-  user: null;
+  user?: Session["user"];
 }
 
 export function SiteHeader({ user }: SiteHeaderProps) {
@@ -62,7 +62,19 @@ export function SiteHeader({ user }: SiteHeaderProps) {
           >
             Email
           </Link>
-          {user ? <></> : <ComingSoon />}
+          {user ? (
+            <Link
+              href="/studio"
+              className={cn(
+                buttonVariants({ size: "sm" }),
+                "rounded-full text-sm",
+              )}
+            >
+              {t("studio")}
+            </Link>
+          ) : (
+            <ComingSoon />
+          )}
         </div>
       </div>
     </header>

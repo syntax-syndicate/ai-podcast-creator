@@ -1,14 +1,19 @@
+import { headers } from "next/headers";
+
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { getSession } from "@/lib/auth";
 
-interface MainLayoutProps {
+export default async function Layout({
+  children,
+}: {
   children: React.ReactNode;
-}
+}) {
+  const session = await getSession({ headers: await headers() });
 
-export default async function MainLayout({ children }: MainLayoutProps) {
   return (
     <div className="relative flex min-h-screen flex-col">
-      <SiteHeader user={null} />
+      <SiteHeader user={session?.user} />
       <main className="flex-1">{children}</main>
       <SiteFooter />
     </div>

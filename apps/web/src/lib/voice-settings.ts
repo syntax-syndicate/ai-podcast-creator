@@ -1,7 +1,12 @@
 import { z } from "zod";
 
+export const defaultVoiceIds = {
+  chris: "iP95p4xoKVk53GoZ742B",
+  jessica: "cgSgspJ2msm6clMCkdW9",
+};
+
 export const defaultVoiceSettings = {
-  similarity_boost: 0.70,
+  similarity_boost: 0.7,
   stability: 0.5,
   style: 0,
   use_speaker_boost: false,

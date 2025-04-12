@@ -1,6 +1,6 @@
-import { CreatePodcastForm } from "./_components/create-podcast-form";
+import { CreateProjectForm } from "./_components/create-project-form";
 
-export default function CreatePodcastPage() {
+export default function Page() {
   return (
     <div>
       <div className="relative mb-4 flex items-center justify-center py-[26vh] pt-[18vh] text-gray-900 sm:pt-[18vh]">
@@ -18,7 +18,7 @@ export default function CreatePodcastPage() {
             </p>
           </div>
           <div className="z-10 m-auto flex w-full flex-col divide-zinc-600 overflow-hidden rounded-xl bg-[rgb(24,24,27)] shadow-lg shadow-black/40 sm:max-w-xl">
-            <CreatePodcastForm />
+            <CreateProjectForm />
           </div>
         </div>
       </div>

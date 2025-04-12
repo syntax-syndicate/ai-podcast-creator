@@ -2,6 +2,7 @@ import { relations, sql } from "drizzle-orm";
 import { index, pgEnum, pgTableCreator } from "drizzle-orm/pg-core";
 
 import type { VoiceSettings } from "@/lib/voice-settings";
+import { projectTypes, projectStatuses } from "@/lib/constants";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -11,18 +12,15 @@ import type { VoiceSettings } from "@/lib/voice-settings";
  */
 export const createTable = pgTableCreator((name) => `ai-podcast_${name}`);
 
-export const projectTypeEnum = pgEnum("project_type_enum", [
-  "blank",
-  "audiobook",
-  "article",
-  "podcast",
-]);
+export const projectTypeEnum = pgEnum("project_type_enum", projectTypes);
+export const projectStatusEnum = pgEnum("project_status_enum", projectStatuses);
 
 export const projects = createTable(
   "project",
   (d) => ({
     id: d.uuid().defaultRandom().primaryKey(),
     projectType: projectTypeEnum().default("blank").notNull(),
+    projectStatus: projectStatusEnum().default("generating").notNull(),
     name: d.varchar({ length: 256 }).notNull(),
     userId: d
       .text()
@@ -37,6 +35,10 @@ export const projects = createTable(
   }),
   (t) => [index("user_id_idx").on(t.userId), index("name_idx").on(t.name)],
 );
+
+export const projectsRelations = relations(projects, ({ many }) => ({
+  chapters: many(chapters),
+}));
 
 export const chapters = createTable("chapter", (d) => ({
   id: d.uuid().defaultRandom().primaryKey(),
@@ -67,6 +69,7 @@ export const blocks = createTable("block", (d) => ({
     .uuid()
     .notNull()
     .references(() => chapters.id),
+  audioUrl: d.text(),
   isConverted: d.boolean().default(false).notNull(),
   isLocked: d.boolean().default(false).notNull(),
 }));
@@ -88,6 +91,13 @@ export const nodes = createTable("node", (d) => ({
   text: d.text().notNull(),
   voiceId: d.varchar({ length: 255 }).notNull(),
   voiceSettings: d.jsonb().$type<VoiceSettings>(),
+}));
+
+export const nodesRelations = relations(nodes, ({ one }) => ({
+  block: one(blocks, {
+    fields: [nodes.blockId],
+    references: [blocks.id],
+  }),
 }));
 
 // better-auth
@@ -157,3 +167,10 @@ export const verifications = createTable("verification", (d) => ({
   createdAt: d.timestamp(),
   updatedAt: d.timestamp(),
 }));
+
+// types
+
+export type Project = typeof projects.$inferSelect;
+export type Chapter = typeof chapters.$inferSelect;
+export type Block = typeof blocks.$inferSelect;
+export type Node = typeof nodes.$inferSelect;
