@@ -1,4 +1,5 @@
 import * as React from "react";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { Editor } from "@/components/studio/editor";
@@ -12,6 +13,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { getSession } from "@/lib/auth";
 import { api, HydrateClient } from "@/trpc/server";
 import { loadSearchParams } from "./search-params";
 
@@ -25,11 +27,23 @@ export default async function Page({
   const { projectId } = await params;
   const { chapterId } = await loadSearchParams(searchParams);
 
+  const session = await getSession({ headers: await headers() });
+
+  if (!session) {
+    redirect("/signin");
+  }
+
   if (!chapterId) {
-    // Find first chapter and redirect to it
     const project = await api.project.getChaptersOrder({ projectId });
+    const firstChapterId = project?.chaptersOrder?.[0];
+
+    if (!firstChapterId) {
+      redirect(`/studio/${projectId}/create-chapter`);
+    }
+
     const searchParams = new URLSearchParams();
-    searchParams.set("chapterId", project?.chaptersOrder?.[0] ?? "");
+    searchParams.set("chapterId", firstChapterId);
+
     redirect(`/studio/${projectId}?${searchParams.toString()}`);
   }
 
@@ -37,7 +51,7 @@ export default async function Page({
 
   return (
     <HydrateClient>
-      <SidebarInset>
+      <SidebarInset className="max-h-screen min-h-screen">
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
