@@ -2,9 +2,8 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { api } from "@/trpc/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { type FieldErrors, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -12,6 +11,8 @@ import { Icons } from "@/components/icons";
 import { Form, FormField } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { createProjectSchema } from "@/lib/validations";
+import { api } from "@/trpc/react";
+import { useUploadThing } from "@/hooks/use-uploadthing";
 
 export function CreateProjectForm() {
   const router = useRouter();
@@ -19,42 +20,56 @@ export function CreateProjectForm() {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
 
-  // const createProject = api.project.create.useMutation({
-  //   onSuccess: () => {
-  //     toast.success("Redirecting to studio...");
-  //     router.push("/studio");
-  //   },
-  //   onError: () => {
-  //     toast.error("Something went wrong. Please try again");
-  //   },
-  // });
+  const createProject = api.project.create.useMutation({
+    onSuccess: () => {
+      toast.success("Redirecting to studio...");
+      router.push("/studio");
+    },
+    onError: () => {
+      toast.error("Something went wrong. Please try again");
+    },
+  });
 
   const form = useForm<z.infer<typeof createProjectSchema>>({
     resolver: zodResolver(createProjectSchema),
     defaultValues: {
+      projectType: "podcast",
       prompt: "",
+    },
+  });
+
+  const { startUpload, isUploading } = useUploadThing("fileUploader", {
+    onClientUploadComplete: () => {
+      toast.success("File uploaded");
+    },
+    onUploadError: () => {
+      toast.error("Failed to upload file");
     },
   });
 
   const { prompt, files, searchEnabled, projectType } = form.watch();
 
   function onSubmit(data: z.infer<typeof createProjectSchema>) {
-    // createProject.mutate(data);
-    toast.info("Launching soon...");
+    createProject.mutate(data);
+  }
+
+  function onInvalid(errors: FieldErrors<z.infer<typeof createProjectSchema>>) {
+    for (const error of Object.values(errors)) {
+      toast.error(error.message);
+    }
   }
 
   async function onKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      // form.handleSubmit(onSubmit)();
-      toast.info("Launching soon...");
+      form.handleSubmit(onSubmit, onInvalid)();
     }
   }
 
   async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files) {
       if (e.target.files.length > 1) {
-        toast.error("You can only upload up to 2 files");
+        toast.error("You can only upload up to 1 file");
         return;
       }
 
@@ -71,8 +86,26 @@ export function CreateProjectForm() {
         return isValid;
       });
 
-      await form.trigger();
-      form.setValue("files", allowedFiles);
+      if (allowedFiles.length === 0) return;
+
+      try {
+        const uploadedFiles = await startUpload(allowedFiles);
+
+        if (!uploadedFiles) {
+          toast.error("Failed to upload files");
+          return;
+        }
+
+        const fileData = uploadedFiles.map((file) => ({
+          url: file.ufsUrl,
+          mimeType: file.type,
+        }));
+
+        form.setValue("files", fileData);
+        await form.trigger();
+      } catch (error) {
+        toast.error("Failed to upload files");
+      }
     }
   }
 
@@ -105,11 +138,7 @@ export function CreateProjectForm() {
 
       <Form {...form}>
         <form
-          // onSubmit={form.handleSubmit(onSubmit)}
-          onSubmit={(e) => {
-            e.preventDefault();
-            toast.info("Launching soon...");
-          }}
+          onSubmit={form.handleSubmit(onSubmit, onInvalid)}
           className="relative z-10 h-full w-full min-w-0 bg-zinc-900 py-3"
         >
           <div className="relative flex w-full flex-1 flex-col items-center gap-6 transition-all duration-300">
@@ -137,7 +166,7 @@ export function CreateProjectForm() {
                     }}
                     placeholder="A podcast about why are people afraid of change"
                     spellCheck={false}
-                    // disabled={createProject.isPending}
+                    disabled={createProject.isPending}
                   ></textarea>
                 )}
               />
@@ -169,7 +198,7 @@ export function CreateProjectForm() {
                   className="hidden"
                   multiple
                   accept=".pdf,.txt,image/*"
-                  max="2"
+                  max="1"
                 />
                 <button
                   id="attachment-button"
@@ -185,7 +214,9 @@ export function CreateProjectForm() {
                     className="flex h-8 w-8 shrink-0 items-center justify-center whitespace-nowrap rounded-md bg-transparent text-sm font-medium text-white transition-colors hover:bg-zinc-800 focus-visible:bg-zinc-800 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     id="send-button"
                     type="submit"
-                    // disabled={!!prompt || createProject.isPending}
+                    disabled={
+                      !form.formState.isValid || createProject.isPending
+                    }
                   >
                     <span className="sr-only">Send</span>
                     <Icons.arrowRight className="size-6" />

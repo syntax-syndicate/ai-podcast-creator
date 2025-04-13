@@ -61,23 +61,6 @@ export const projectRouter = createTRPCRouter({
   create: protectedProcedure
     .input(createProjectSchema)
     .mutation(async ({ ctx, input }) => {
-      throw new TRPCError({
-        code: "FORBIDDEN",
-        message: "Launching soon...",
-      });
-
-      const uploadedFiles =
-        Array.isArray(input.files) && input.files.length > 0
-          ? await utapi.uploadFiles(input.files)
-          : [];
-
-      if (uploadedFiles.some((file) => !!file.error)) {
-        throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "Error uploading files",
-        });
-      }
-
       // database transaction
       const { project, chapter } = await ctx.db.transaction(async (tx) => {
         const [project] = await ctx.db
@@ -125,7 +108,7 @@ export const projectRouter = createTRPCRouter({
 
       // queue script generation
       const queue = qstash.queue({
-        queueName: `project:${project.id}:script`,
+        queueName: `project_${project.id}_script`,
       });
 
       await queue.enqueueJSON({
@@ -134,10 +117,7 @@ export const projectRouter = createTRPCRouter({
         ),
         body: {
           prompt: input.prompt,
-          files: uploadedFiles.map((file) => ({
-            url: file.data?.ufsUrl,
-            mimeType: file.data?.type,
-          })),
+          files: input.files,
           searchEnabled: input.searchEnabled,
           projectType: input.projectType,
         },
