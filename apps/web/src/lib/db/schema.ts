@@ -26,7 +26,7 @@ export const projects = createTable(
       .text()
       .notNull()
       .references(() => users.id),
-    chaptersOrder: d.uuid().array(),
+    chaptersOrder: d.uuid().array().default([]).notNull(),
     createdAt: d
       .timestamp({ withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
@@ -47,7 +47,7 @@ export const chapters = createTable("chapter", (d) => ({
     .notNull()
     .references(() => projects.id, { onDelete: "cascade" }),
   name: d.varchar({ length: 256 }).notNull(),
-  blocksOrder: d.uuid().array(),
+  blocksOrder: d.uuid().array().default([]).notNull(),
   createdAt: d
     .timestamp({ withTimezone: true })
     .default(sql`CURRENT_TIMESTAMP`)

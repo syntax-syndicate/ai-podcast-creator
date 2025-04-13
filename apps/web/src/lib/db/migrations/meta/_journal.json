@@ -22,6 +22,13 @@
       "when": 1744260671520,
       "tag": "0002_lush_magik",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1744552234981,
+      "tag": "0003_tough_tattoo",
+      "breakpoints": true
     }
   ]
 }
