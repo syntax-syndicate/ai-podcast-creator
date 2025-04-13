@@ -2,6 +2,7 @@ import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { withTracing } from "@posthog/ai";
 import { verifySignatureAppRouter } from "@upstash/qstash/nextjs";
 import { generateObject, type FilePart, type TextPart } from "ai";
+import { eq } from "drizzle-orm";
 import { PostHog } from "posthog-node";
 import { z } from "zod";
 
@@ -9,8 +10,8 @@ import { env } from "@/env";
 import { db } from "@/lib/db";
 import { ProjectType } from "@/lib/constants";
 import { defaultVoiceIds } from "@/lib/voice-settings";
-import { blocks, nodes, projects } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
+import { blocks, chapters, nodes, projects } from "@/lib/db/schema";
+import { qstash } from "@/lib/qstash";
 
 type Params = Promise<{ projectId: string; chapterId: string }>;
 
@@ -95,6 +96,8 @@ export const POST = verifySignatureAppRouter(
       });
 
       await db.transaction(async (tx) => {
+        const createdBlocks: string[] = [];
+
         for (const { speaker, text } of object) {
           const voiceIds = {
             1: defaultVoiceIds.chris,
@@ -126,7 +129,14 @@ export const POST = verifySignatureAppRouter(
             tx.rollback();
             throw new Error("Failed to create a node");
           }
+
+          createdBlocks.push(block.id);
         }
+
+        await tx
+          .update(chapters)
+          .set({ blocksOrder: createdBlocks })
+          .where(eq(chapters.id, chapterId));
 
         await tx
           .update(projects)
@@ -138,6 +148,13 @@ export const POST = verifySignatureAppRouter(
 
       // clean up
       await posthog.shutdown();
+
+      // remove the queue
+      await qstash
+        .queue({
+          queueName: `project_${projectId}_script`,
+        })
+        .delete();
 
       return new Response(null, { status: 201 });
     } catch (err) {
