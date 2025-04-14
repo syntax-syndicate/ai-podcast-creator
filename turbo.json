@@ -27,7 +27,9 @@
         "GITHUB_CLIENT_SECRET",
         "GOOGLE_CLIENT_ID",
         "GOOGLE_CLIENT_SECRET",
-        "BETTER_AUTH_TRUSTED_ORIGIN"
+        "BETTER_AUTH_TRUSTED_ORIGIN",
+        "POSTHOG_API_KEY",
+        "UPLOADTHING_TOKEN"
       ],
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
