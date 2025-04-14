@@ -2,7 +2,8 @@
 import Link from "next/link";
 
 import { Icons } from "@/components/icons";
-import { ModeToggle } from "@/components/mode-toggle";
+import { LocaleSelector } from "@/components/locale-selector";
+// import { ModeToggle } from "@/components/mode-toggle";
 import { buttonVariants } from "@/components/ui/button";
 // import { Input } from "@/components/ui/input";
 import { siteConfig } from "@/config/site";
@@ -79,6 +80,7 @@ export function SiteFooter() {
                 <span className="sr-only">GitHub</span>
               </Link>
               {/* <ModeToggle /> */}
+              <LocaleSelector />
             </div>
           </section>
         </div>
