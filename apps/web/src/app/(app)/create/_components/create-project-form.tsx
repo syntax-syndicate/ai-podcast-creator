@@ -20,15 +20,15 @@ export function CreateProjectForm() {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
 
-  const createProject = api.project.create.useMutation({
-    onSuccess: () => {
-      toast.success("Redirecting to studio...");
-      router.push("/studio");
-    },
-    onError: () => {
-      toast.error("Something went wrong. Please try again");
-    },
-  });
+  // const createProject = api.project.create.useMutation({
+  //   onSuccess: () => {
+  //     toast.success("Redirecting to studio...");
+  //     router.push("/studio");
+  //   },
+  //   onError: () => {
+  //     toast.error("Something went wrong. Please try again");
+  //   },
+  // });
 
   const form = useForm<z.infer<typeof createProjectSchema>>({
     resolver: zodResolver(createProjectSchema),
@@ -38,19 +38,20 @@ export function CreateProjectForm() {
     },
   });
 
-  const { startUpload, isUploading } = useUploadThing("fileUploader", {
-    onClientUploadComplete: () => {
-      toast.success("File uploaded");
-    },
-    onUploadError: () => {
-      toast.error("Failed to upload file");
-    },
-  });
+  // const { startUpload, isUploading } = useUploadThing("fileUploader", {
+  //   onClientUploadComplete: () => {
+  //     toast.success("File uploaded");
+  //   },
+  //   onUploadError: () => {
+  //     toast.error("Failed to upload file");
+  //   },
+  // });
 
   const { prompt, files, searchEnabled, projectType } = form.watch();
 
   function onSubmit(data: z.infer<typeof createProjectSchema>) {
-    createProject.mutate(data);
+    toast.info("Launching soon...");
+    // createProject.mutate(data);
   }
 
   function onInvalid(errors: FieldErrors<z.infer<typeof createProjectSchema>>) {
@@ -86,26 +87,28 @@ export function CreateProjectForm() {
         return isValid;
       });
 
+      return toast.info("Launching soon...");
+
       if (allowedFiles.length === 0) return;
 
-      try {
-        const uploadedFiles = await startUpload(allowedFiles);
+      // try {
+      //   const uploadedFiles = await startUpload(allowedFiles);
 
-        if (!uploadedFiles) {
-          toast.error("Failed to upload files");
-          return;
-        }
+      //   if (!uploadedFiles) {
+      //     toast.error("Failed to upload files");
+      //     return;
+      //   }
 
-        const fileData = uploadedFiles.map((file) => ({
-          url: file.ufsUrl,
-          mimeType: file.type,
-        }));
+      //   const fileData = uploadedFiles.map((file) => ({
+      //     url: file.ufsUrl,
+      //     mimeType: file.type,
+      //   }));
 
-        form.setValue("files", fileData);
-        await form.trigger();
-      } catch (error) {
-        toast.error("Failed to upload files");
-      }
+      //   form.setValue("files", fileData);
+      //   await form.trigger();
+      // } catch (error) {
+      //   toast.error("Failed to upload files");
+      // }
     }
   }
 
@@ -166,7 +169,7 @@ export function CreateProjectForm() {
                     }}
                     placeholder="A podcast about why are people afraid of change"
                     spellCheck={false}
-                    disabled={createProject.isPending}
+                    // disabled={createProject.isPending}
                   ></textarea>
                 )}
               />
@@ -214,9 +217,9 @@ export function CreateProjectForm() {
                     className="flex h-8 w-8 shrink-0 items-center justify-center whitespace-nowrap rounded-md bg-transparent text-sm font-medium text-white transition-colors hover:bg-zinc-800 focus-visible:bg-zinc-800 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     id="send-button"
                     type="submit"
-                    disabled={
-                      !form.formState.isValid || createProject.isPending
-                    }
+                    // disabled={
+                    //   !form.formState.isValid || createProject.isPending
+                    // }
                   >
                     <span className="sr-only">Send</span>
                     <Icons.arrowRight className="size-6" />

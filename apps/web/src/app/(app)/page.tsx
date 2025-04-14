@@ -23,19 +23,19 @@ export default function HomePage() {
             <Announcement />
 
             <h1
-              className="animate-fade-up mt-3 text-balance text-center text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]"
+              className="mt-3 animate-fade-up text-balance text-center text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]"
               style={{ animationDelay: "0.20s", animationFillMode: "both" }}
             >
               {t("title")}
             </h1>
             <p
-              className="animate-fade-up text-muted-foreground mt-3 max-w-xl text-balance text-center sm:text-lg"
+              className="mt-3 max-w-xl animate-fade-up text-balance text-center text-muted-foreground sm:text-lg"
               style={{ animationDelay: "0.30s", animationFillMode: "both" }}
             >
               {t("description")}
             </p>
             <div
-              className="animate-fade-up mt-6 flex items-center gap-2"
+              className="mt-6 flex animate-fade-up items-center gap-2"
               style={{ animationDelay: "0.40s", animationFillMode: "both" }}
             >
               <Link href="#episodes" className={cn(buttonVariants())}>
@@ -58,11 +58,11 @@ export default function HomePage() {
             <div>{t("socialProof")}</div>
           </div>
           <div className="mt-4 flex items-center justify-center gap-2">
-            <div className="bg-secondary ring-offset-background inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all">
+            <div className="inline-flex items-center justify-center whitespace-nowrap rounded-sm bg-secondary px-3 py-1.5 text-sm font-medium ring-offset-background transition-all">
               <Icons.applePodcasts className="mr-2 size-4" />
               Apple Podcasts
             </div>
-            <div className="bg-secondary ring-offset-background inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all">
+            <div className="inline-flex items-center justify-center whitespace-nowrap rounded-sm bg-secondary px-3 py-1.5 text-sm font-medium ring-offset-background transition-all">
               <Icons.spotify className="mr-2 size-4" />
               Spotify
             </div>
@@ -305,7 +305,7 @@ export default function HomePage() {
                 href="/episodes"
                 className={cn(
                   buttonVariants({}),
-                  "group bg-violet-600 font-bold hover:bg-violet-600/90 max-md:w-full dark:text-white",
+                  "group bg-violet-600 font-bold hover:bg-violet-600/90 dark:text-white max-md:w-full",
                 )}
               >
                 <span>{t("cta.primaryAction")}</span>

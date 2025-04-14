@@ -15,6 +15,7 @@ import { createProjectSchema } from "@/lib/validations";
 
 export const projectRouter = createTRPCRouter({
   get: protectedProcedure.query(async ({ ctx }) => {
+    // implement search/pagincation later
     return await ctx.db.query.projects.findMany({
       where: (table, { eq }) => eq(table.userId, ctx.session.user.id),
     });
