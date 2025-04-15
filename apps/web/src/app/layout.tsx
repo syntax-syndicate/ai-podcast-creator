@@ -23,13 +23,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   description: siteConfig.description,
   keywords: [
-    "Podcasts",
     "AI Podcasts",
+    "Generate Podcasts",
+    "Generate AI Podcasts",
     "Parallax Podcast",
-    "Parallax",
-    "Prllx",
-    "prllxhq",
-    "prllxhq.com",
+    "Open-Source",
   ],
   authors: [
     {
