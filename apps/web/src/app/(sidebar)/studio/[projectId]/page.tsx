@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { Editor } from "@/components/studio/editor";
-import { EditorSkeleton } from "@/components/studio/editor.skeleton";
+// import { AudioPlayer } from "@/components/audio-player";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,7 +14,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { getSession } from "@/lib/auth";
-import { api, HydrateClient } from "@/trpc/server";
+import { trpc, HydrateClient } from "@/trpc/server";
 import { loadSearchParams } from "./search-params";
 
 export default async function Page({
@@ -34,7 +34,7 @@ export default async function Page({
   }
 
   if (!chapterId) {
-    const project = await api.project.getChaptersOrder({ projectId });
+    const project = await trpc.project.getChaptersOrder({ projectId });
     const firstChapterId = project?.chaptersOrder?.[0];
 
     if (!firstChapterId) {
@@ -47,12 +47,12 @@ export default async function Page({
     redirect(`/studio/${projectId}?${searchParams.toString()}`);
   }
 
-  void api.chapter.getById.prefetch({ chapterId });
+  void trpc.chapter.getById.prefetch({ chapterId });
 
   return (
     <HydrateClient>
-      <SidebarInset className="max-h-screen min-h-screen">
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+      <div className="relative h-screen w-screen">
+        <header className="sticky top-0 flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
@@ -66,10 +66,10 @@ export default async function Page({
           </div>
         </header>
 
-        <React.Suspense fallback={<EditorSkeleton />}>
-          <Editor projectId={projectId} chapterId={chapterId} />
-        </React.Suspense>
-      </SidebarInset>
+        <Editor projectId={projectId} chapterId={chapterId} />
+
+        {/* <AudioPlayer /> */}
+      </div>
     </HydrateClient>
   );
 }

@@ -8,6 +8,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 import "./src/env";
 
 const config: NextConfig = {
+  reactStrictMode: true,
   images: {
     remotePatterns: [
       {
@@ -20,12 +21,18 @@ const config: NextConfig = {
       },
     ],
   },
+  compiler: {
+    removeConsole: {
+      exclude: process.env.NODE_ENV === "production" ? ["error"] : undefined,
+    },
+  },
   typescript: {
     ignoreBuildErrors: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
   },
+  devIndicators: false,
 };
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");

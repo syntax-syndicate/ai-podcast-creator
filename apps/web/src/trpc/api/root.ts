@@ -1,5 +1,6 @@
 import { blockRouter } from "@/trpc/api/routers/block";
 import { chapterRouter } from "@/trpc/api/routers/chapter";
+import { nodeRouter } from "@/trpc/api/routers/node";
 import { projectRouter } from "@/trpc/api/routers/project";
 import { createCallerFactory, createTRPCRouter } from "@/trpc/api/trpc";
 
@@ -12,6 +13,7 @@ export const appRouter = createTRPCRouter({
   project: projectRouter,
   chapter: chapterRouter,
   block: blockRouter,
+  node: nodeRouter,
 });
 
 // export type definition of API

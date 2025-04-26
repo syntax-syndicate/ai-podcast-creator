@@ -47,6 +47,7 @@ export const chapters = createTable("chapter", (d) => ({
     .notNull()
     .references(() => projects.id, { onDelete: "cascade" }),
   name: d.varchar({ length: 256 }).notNull(),
+  audioUrl: d.text(),
   blocksOrder: d.uuid().array().default([]).notNull(),
   createdAt: d
     .timestamp({ withTimezone: true })
@@ -102,17 +103,21 @@ export const nodesRelations = relations(nodes, ({ one }) => ({
 
 // better-auth
 
-export const users = createTable("user", (d) => ({
-  id: d.text().primaryKey(),
-  name: d.text().notNull(),
-  email: d.text().notNull().unique(),
-  emailVerified: d.boolean().notNull(),
-  username: d.text().unique(),
-  displayUsername: d.text(),
-  image: d.text(),
-  createdAt: d.timestamp().notNull(),
-  updatedAt: d.timestamp().notNull(),
-}));
+export const users = createTable(
+  "user",
+  (d) => ({
+    id: d.text().primaryKey(),
+    name: d.text().notNull(),
+    email: d.text().notNull().unique(),
+    emailVerified: d.boolean().notNull(),
+    username: d.text().unique(),
+    displayUsername: d.text(),
+    image: d.text(),
+    createdAt: d.timestamp().notNull(),
+    updatedAt: d.timestamp().notNull(),
+  }),
+  (t) => [index("user_email_idx").on(t.email)],
+);
 
 export const usersRelations = relations(users, ({ many }) => ({
   projects: many(projects),
@@ -133,7 +138,10 @@ export const sessions = createTable(
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
   }),
-  (t) => [index("t_user_id_idx").on(t.userId)],
+  (t) => [
+    index("t_user_id_idx").on(t.userId),
+    index("t_token_idx").on(t.token),
+  ],
 );
 
 export const accounts = createTable(
@@ -159,14 +167,18 @@ export const accounts = createTable(
   (t) => [index("account_user_id_idx").on(t.userId)],
 );
 
-export const verifications = createTable("verification", (d) => ({
-  id: d.text().primaryKey(),
-  identifier: d.text().notNull(),
-  value: d.text().notNull(),
-  expiresAt: d.timestamp().notNull(),
-  createdAt: d.timestamp(),
-  updatedAt: d.timestamp(),
-}));
+export const verifications = createTable(
+  "verification",
+  (d) => ({
+    id: d.text().primaryKey(),
+    identifier: d.text().notNull(),
+    value: d.text().notNull(),
+    expiresAt: d.timestamp().notNull(),
+    createdAt: d.timestamp(),
+    updatedAt: d.timestamp(),
+  }),
+  (t) => [index("verification_identifier_idx").on(t.identifier)],
+);
 
 // types
 

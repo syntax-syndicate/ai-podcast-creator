@@ -1,3 +1,8 @@
+import { experimental_generateSpeech as generateSpeech } from "ai";
+import { elevenlabs } from "@ai-sdk/elevenlabs";
+import { hume } from "@ai-sdk/hume";
+import { openai } from "@ai-sdk/openai";
+import { TRPCError } from "@trpc/server";
 import {
   createTRPCRouter,
   protectedProcedure,
@@ -5,7 +10,6 @@ import {
 } from "@/trpc/api/trpc";
 import { z } from "zod";
 import { eq } from "drizzle-orm";
-import { TRPCError } from "@trpc/server";
 
 import { env } from "@/env";
 import { db } from "@/lib/db";
@@ -13,6 +17,55 @@ import { blocks } from "@/lib/db/schema";
 import { utapi } from "@/lib/uploadthing";
 
 export const blockRouter = createTRPCRouter({
+  update: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        audioUrl: z.string().optional(),
+        isConverted: z.boolean().optional(),
+        isLocked: z.boolean().optional(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const block = await ctx.db.query.blocks.findFirst({
+        where: (table, { eq }) => eq(table.id, input.id),
+        with: {
+          chapter: {
+            with: {
+              project: {
+                columns: {
+                  userId: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
+      if (!block) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Block not found",
+        });
+      }
+
+      if (block.chapter.project.userId !== ctx.session.user.id) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "You don't have permission to access this block",
+        });
+      }
+
+      return await ctx.db
+        .update(blocks)
+        .set({
+          audioUrl: input.audioUrl,
+          isConverted: input.isConverted,
+          isLocked: input.isLocked,
+        })
+        .where(eq(blocks.id, input.id));
+    }),
+
   generateSpeech: protectedProcedure
     .input(
       z.object({
@@ -53,6 +106,22 @@ export const blockRouter = createTRPCRouter({
 
       // parallel fetch
       const bufferPromises = block.children.map(async (node) => {
+        // ai sdk
+        // const { audio } = await generateSpeech({
+        //   model: openai.speech("gpt-4o-mini-tts"),
+        //   // model: hume.speech(),
+        //   text: node.text,
+        //   // openai
+        //   voice: "alloy",
+        //   // hume
+        //   // voice: "ee96fb5f-ec1a-4f41-a9ba-6d119e64c8fd",
+        //   providerOptions: {
+        //     // hume: {},
+        //   },
+        // });
+
+        // return Buffer.from(audio.uint8Array);
+
         const response = await fetch(
           `https://api.elevenlabs.io/v1/text-to-speech/${node.voiceId}`,
           {

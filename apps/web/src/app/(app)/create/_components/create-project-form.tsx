@@ -11,7 +11,7 @@ import { Icons } from "@/components/icons";
 import { Form, FormField } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { createProjectSchema } from "@/lib/validations";
-import { api } from "@/trpc/react";
+import { trpc } from "@/trpc/react";
 import { useUploadThing } from "@/hooks/use-uploadthing";
 
 export function CreateProjectForm() {
@@ -20,7 +20,7 @@ export function CreateProjectForm() {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
 
-  // const createProject = api.project.create.useMutation({
+  // const createProject = trpc.project.create.useMutation({
   //   onSuccess: () => {
   //     toast.success("Redirecting to studio...");
   //     router.push("/studio");
@@ -89,7 +89,7 @@ export function CreateProjectForm() {
 
       return toast.info("Launching soon...");
 
-      if (allowedFiles.length === 0) return;
+      // if (allowedFiles.length === 0) return;
 
       // try {
       //   const uploadedFiles = await startUpload(allowedFiles);

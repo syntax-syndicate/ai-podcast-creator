@@ -13,7 +13,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { getSession } from "@/lib/auth";
-import { api, HydrateClient } from "@/trpc/server";
+import { trpc, HydrateClient } from "@/trpc/server";
 
 export default async function Page() {
   const session = await getSession({ headers: await headers() });
@@ -22,7 +22,7 @@ export default async function Page() {
     redirect("/signin");
   }
 
-  void api.project.get.prefetch();
+  void trpc.project.get.prefetch();
 
   return (
     <HydrateClient>
@@ -41,9 +41,7 @@ export default async function Page() {
           </div>
         </header>
 
-        <React.Suspense fallback={<StudioSkeleton />}>
-          <Studio />
-        </React.Suspense>
+        <Studio />
       </SidebarInset>
     </HydrateClient>
   );

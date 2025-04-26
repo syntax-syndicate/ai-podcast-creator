@@ -14,12 +14,34 @@ import { absoluteUrl, capitalize } from "@/lib/utils";
 import { createProjectSchema } from "@/lib/validations";
 
 export const projectRouter = createTRPCRouter({
-  get: protectedProcedure.query(async ({ ctx }) => {
-    // implement search/pagincation later
-    return await ctx.db.query.projects.findMany({
-      where: (table, { eq }) => eq(table.userId, ctx.session.user.id),
-    });
-  }),
+  get: protectedProcedure
+    .input(
+      z
+        .object({
+          search: z.string().optional(),
+        })
+        .optional(),
+    )
+    .query(async ({ ctx, input }) => {
+      return await ctx.db.query.projects.findMany({
+        where: (table, { and, eq, ilike }) => {
+          const conditions = [eq(table.userId, ctx.session.user.id)];
+          if (input?.search) {
+            conditions.push(ilike(table.name, `%${input.search}%`));
+          }
+          return and(...conditions);
+        },
+        with: {
+          chapters: {
+            columns: {
+              id: true,
+              audioUrl: true,
+            },
+          },
+        },
+        orderBy: (table, { desc }) => desc(table.updatedAt),
+      });
+    }),
 
   getById: protectedProcedure
     .input(z.object({ projectId: z.string() }))

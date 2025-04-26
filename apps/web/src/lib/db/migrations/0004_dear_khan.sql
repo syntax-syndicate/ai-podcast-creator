@@ -1,0 +1,1 @@
+ALTER TABLE "ai-podcast_chapter" ADD COLUMN "audio_url" text;
