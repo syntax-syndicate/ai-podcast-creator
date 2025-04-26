@@ -22,18 +22,13 @@ export const env = createEnv({
     QSTASH_NEXT_SIGNING_KEY: z.string(),
 
     UPLOADTHING_TOKEN: z.string(),
-    // en
-    DISCOVER_FEED_URL: z.string().url(),
-
-    // ru
-    NEWS_FEED_URL: z.string().url(),
-    FINANCE_FEED_URL: z.string().url(),
 
     OPENAI_API_KEY: z.string(),
 
     XI_API_KEY: z.string(),
 
-    CLERK_SECRET_KEY: z.string(),
+    // HUME_API_KEY: z.string(),
+    // HUME_SECRET_KEY: z.string(),
   },
 
   /**
@@ -44,7 +39,6 @@ export const env = createEnv({
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
     NEXT_PUBLIC_APP_URL: z.string().url(),
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
   },
 
   /**
@@ -66,20 +60,14 @@ export const env = createEnv({
 
     UPLOADTHING_TOKEN: process.env.UPLOADTHING_TOKEN,
 
-    DISCOVER_FEED_URL: process.env.DISCOVER_FEED_URL,
-
-    NEWS_FEED_URL: process.env.NEWS_FEED_URL,
-    FINANCE_FEED_URL: process.env.FINANCE_FEED_URL,
-
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
 
     XI_API_KEY: process.env.XI_API_KEY,
 
-    CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
-      process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
-
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+
+    // HUME_API_KEY: process.env.HUME_API_KEY,
+    // HUME_SECRET_KEY: process.env.HUME_SECRET_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
