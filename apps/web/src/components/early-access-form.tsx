@@ -75,7 +75,7 @@ export function EarlyAccessForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         {isSuccess ? (
-          <p className="h-9">
+          <p className="h-9 text-center max-md:mb-4">
             You're on the list. We'll notify you when we launch.
           </p>
         ) : (
