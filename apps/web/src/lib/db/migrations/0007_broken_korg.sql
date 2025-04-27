@@ -1,0 +1,1 @@
+CREATE INDEX "early_access_email_idx" ON "ai-podcast_early_access" USING btree ("email");

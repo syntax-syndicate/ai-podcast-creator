@@ -12,6 +12,8 @@ export const env = createEnv({
       .enum(["development", "test", "production"])
       .default("development"),
 
+    EARLY_ACCESS_ENABLED: z.coerce.boolean(),
+
     POSTHOG_API_KEY: z.string(),
 
     UPSTASH_REDIS_REST_URL: z.string().url(),
@@ -48,6 +50,8 @@ export const env = createEnv({
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
+
+    EARLY_ACCESS_ENABLED: process.env.EARLY_ACCESS_ENABLED,
 
     POSTHOG_API_KEY: process.env.POSTHOG_API_KEY,
 

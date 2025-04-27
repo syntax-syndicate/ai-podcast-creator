@@ -22,9 +22,12 @@ const config: NextConfig = {
     ],
   },
   compiler: {
-    removeConsole: {
-      exclude: process.env.NODE_ENV === "production" ? ["error"] : undefined,
-    },
+    removeConsole:
+      process.env.NODE_ENV === "production"
+        ? {
+            exclude: ["error"],
+          }
+        : undefined,
   },
   typescript: {
     ignoreBuildErrors: true,
