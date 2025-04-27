@@ -1,4 +1,4 @@
-import type { FooterItem, MainNavItem } from "@/types";
+import type { FooterItem } from "@/types";
 
 const links = {
   instagram: "https://instagram.com/prllx.podcast",
@@ -9,7 +9,7 @@ export const siteConfig = {
   name: "Parallax Podcast",
   url: "https://prllxhq.com",
   ogImage: "https://prllxhq.com/og.png",
-  description: "Daily Interactive AI Podcast",
+  description: "Generate AI-powered Podcasts",
   links,
   mainNav: [
     { key: "studio", href: "/" },
