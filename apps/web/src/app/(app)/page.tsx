@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 import { Announcement } from "@/components/announcement";
+import { EarlyAccessForm } from "@/components/early-access-form";
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -34,7 +35,7 @@ export default function HomePage() {
             >
               {t("description")}
             </p>
-            <div
+            {/* <div
               className="mt-6 flex animate-fade-up items-center gap-2"
               style={{ animationDelay: "0.40s", animationFillMode: "both" }}
             >
@@ -47,6 +48,12 @@ export default function HomePage() {
               >
                 {t("createNow")}
               </Link>
+            </div> */}
+            <div
+              className="mt-6 flex animate-fade-up items-center gap-2"
+              style={{ animationDelay: "0.50s", animationFillMode: "both" }}
+            >
+              <EarlyAccessForm />
             </div>
           </div>
         </div>

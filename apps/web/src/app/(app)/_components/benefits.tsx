@@ -81,7 +81,7 @@ export function Benefits() {
                   {t("benefits.dailyNews.description")}
                 </p>
                 <Link
-                  href="/episodes"
+                  href="#"
                   className={cn(
                     buttonVariants(),
                     "w-full bg-violet-600 hover:bg-violet-600/90 dark:text-white",
@@ -101,9 +101,9 @@ export function Benefits() {
                 </p>
                 <div className="bg-muted inline-flex w-full items-center justify-between rounded-md px-2 py-1 text-sm">
                   <div></div>
-                  <div>prllx.studio/p/b7c29f</div>
+                  <div>prllxhq.com/p/b7c29f</div>
                   <div>
-                    <Link href="/p/b7c29f">
+                    <Link href="#">
                       <Icons.externalLink className="text-muted-foreground size-4" />
                     </Link>
                   </div>

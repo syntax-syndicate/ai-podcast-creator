@@ -103,6 +103,21 @@ export const nodesRelations = relations(nodes, ({ one }) => ({
 
 // better-auth
 
+export const earlyAccess = createTable(
+  "early_access",
+  (d) => ({
+    id: d.text().primaryKey(),
+    email: d.text().notNull().unique(),
+    createdAt: d
+      .timestamp({ withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: d.timestamp({ withTimezone: true }).$onUpdate(() => new Date()),
+    isEarlyAccess: d.boolean().notNull().default(false),
+  }),
+  (t) => [index("early_access_email_idx").on(t.email)],
+);
+
 export const users = createTable(
   "user",
   (d) => ({
