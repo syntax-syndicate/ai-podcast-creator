@@ -26,7 +26,8 @@ export async function GET(req: NextRequest) {
     const [result] = await db.select({ count: count() }).from(earlyAccess);
 
     return NextResponse.json({ count: result?.count ?? 0 }, { status: 200 });
-  } catch {
+  } catch (error) {
+    console.error(error);
     return NextResponse.json({ count: 0 }, { status: 400 });
   }
 }
