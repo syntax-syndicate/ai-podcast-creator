@@ -281,7 +281,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <Pricing />
+        {/* <Pricing /> */}
 
         <div className="relative mx-auto mb-20 w-full max-w-5xl pb-10 pt-20 md:mb-40 md:mt-20 md:pt-40">
           <div className="pointer-events-none absolute right-0 top-1/2 hidden h-full w-1/2 -translate-y-[40%] md:block">
