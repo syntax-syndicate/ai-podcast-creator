@@ -13,7 +13,7 @@ export const env = createEnv({
       .default("development"),
 
     EARLY_ACCESS_ENABLED: z.coerce.boolean(),
-    // POLAR_ACCESS_TOKEN: z.string(),
+    POLAR_ACCESS_TOKEN: z.string(),
 
     POSTHOG_API_KEY: z.string(),
 
@@ -53,7 +53,7 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
 
     EARLY_ACCESS_ENABLED: process.env.EARLY_ACCESS_ENABLED,
-    // POLAR_ACCESS_TOKEN: process.env.POLAR_ACCESS_TOKEN,
+    POLAR_ACCESS_TOKEN: process.env.POLAR_ACCESS_TOKEN,
 
     POSTHOG_API_KEY: process.env.POSTHOG_API_KEY,
 

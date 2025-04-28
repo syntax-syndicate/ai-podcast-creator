@@ -12,7 +12,7 @@ import * as schema from "@/lib/db/schema";
 import { env } from "@/env";
 
 const polarClient = new Polar({
-  accessToken: process.env.POLAR_ACCESS_TOKEN,
+  accessToken: env.POLAR_ACCESS_TOKEN,
   server: "sandbox",
 });
 
