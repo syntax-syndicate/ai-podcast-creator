@@ -12,6 +12,7 @@ import { testimonials } from "@/config/testimonials";
 import { cn } from "@/lib/utils";
 import { Benefits } from "./_components/benefits";
 import { PodcastTabs } from "./_components/podcast-tabs";
+import { Pricing } from "./_components/pricing";
 
 export default function HomePage() {
   const t = useTranslations("pages.home");
@@ -279,6 +280,8 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+
+        <Pricing />
 
         <div className="relative mx-auto mb-20 w-full max-w-5xl pb-10 pt-20 md:mb-40 md:mt-20 md:pt-40">
           <div className="pointer-events-none absolute right-0 top-1/2 hidden h-full w-1/2 -translate-y-[40%] md:block">

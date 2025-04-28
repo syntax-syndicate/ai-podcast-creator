@@ -1,5 +1,7 @@
 import { cache } from "react";
 // import { redirect } from "next/navigation";
+import { polar } from "@polar-sh/better-auth";
+import { Polar } from "@polar-sh/sdk";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { username, customSession } from "better-auth/plugins";
@@ -8,6 +10,11 @@ import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import * as schema from "@/lib/db/schema";
 import { env } from "@/env";
+
+const polarClient = new Polar({
+  accessToken: env.POLAR_ACCESS_TOKEN,
+  server: "sandbox",
+});
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -18,6 +25,24 @@ export const auth = betterAuth({
     usePlural: true,
   }),
   plugins: [
+    polar({
+      client: polarClient,
+      createCustomerOnSignUp: true,
+      enableCustomerPortal: true,
+      checkout: {
+        enabled: true,
+        products: [
+          {
+            productId: "cb4e7dfd-70ba-4175-98f4-11f00f977a4d",
+            slug: "pro",
+          },
+        ],
+        successUrl: "/success?checkout_id={CHECKOUT_ID}",
+      },
+      // webhooks: {
+      //   secret: env.POLAR_WEBHOOK_SECRET,
+      // }
+    }),
     username(),
     customSession(async ({ user, session }) => {
       const [foundUser] = await db

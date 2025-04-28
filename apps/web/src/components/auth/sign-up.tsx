@@ -13,7 +13,11 @@ import { Icons } from "@/components/icons";
 
 const formSchema = z.object({});
 
-export function SignUp() {
+interface SignUpProps {
+  callbackUrl?: string;
+}
+
+export function SignUp({ callbackUrl }: SignUpProps) {
   const router = useRouter();
   const [loading, setLoading] = React.useState(false);
 
@@ -27,6 +31,7 @@ export function SignUp() {
       setLoading={setLoading}
       title="Create an account"
       description="Welcome! Please fill in the details to get started."
+      callbackUrl={callbackUrl}
       type="signup"
     >
       <form className="flex flex-col flex-nowrap items-stretch justify-start gap-8">

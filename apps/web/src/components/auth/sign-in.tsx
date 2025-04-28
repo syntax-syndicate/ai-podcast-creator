@@ -13,7 +13,11 @@ import { Icons } from "@/components/icons";
 
 const formSchema = z.object({});
 
-export function SignIn() {
+interface SignInProps {
+  callbackUrl?: string;
+}
+
+export function SignIn({ callbackUrl }: SignInProps) {
   const router = useRouter();
   const [loading, setLoading] = React.useState(false);
 
@@ -27,6 +31,7 @@ export function SignIn() {
       setLoading={setLoading}
       title="Sign in to Parallax Podcast"
       description="Welcome back! Please sign in to continue"
+      callbackUrl={callbackUrl}
       type="signin"
     >
       <form className="flex flex-col flex-nowrap items-stretch justify-start gap-8">
@@ -41,7 +46,7 @@ export function SignIn() {
                   >
                     Email address or username
                   </label>
-                </div>  
+                </div>
                 <input
                   className="better-auth-outline-focus better-auth-focus-no-outline better-auth-outline-hover m-0 aspect-auto max-h-9 w-full rounded-[0.375rem] border-0 border-[rgba(0,0,0,0.28)] bg-white px-3 py-1.5 text-[0.8125rem] font-normal leading-snug tracking-normal text-[rgb(19,19,22)] accent-[rgb(47,48,55)] shadow-[rgba(0,0,0,0.11)_0px_0px_0px_1px,rgba(0,0,0,0.07)_0px_0px_1px_0px] outline-2 outline-offset-2 transition-shadow duration-200 ease-in-out"
                   id="identifier-field"
