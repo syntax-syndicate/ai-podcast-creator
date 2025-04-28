@@ -16,9 +16,14 @@ type ProviderProps = {
 interface OAuthSignInProps {
   loading: boolean;
   setLoading: (loading: boolean) => void;
+  callbackUrl?: string;
 }
 
-export function OAuthSignIn({ loading, setLoading }: OAuthSignInProps) {
+export function OAuthSignIn({
+  loading,
+  setLoading,
+  callbackUrl,
+}: OAuthSignInProps) {
   const providers: ProviderProps[] = [
     { name: "GitHub", icon: "gitHub", strategy: "github" },
     { name: "Google", icon: "google", strategy: "google" },
@@ -29,6 +34,7 @@ export function OAuthSignIn({ loading, setLoading }: OAuthSignInProps) {
       setLoading(true);
       await authClient.signIn.social({
         provider,
+        callbackURL: callbackUrl,
       });
     } catch {
       setLoading(false);

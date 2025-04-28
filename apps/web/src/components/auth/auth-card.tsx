@@ -9,6 +9,7 @@ interface AuthCardProps {
   children: React.ReactNode;
   loading: boolean;
   setLoading: (loading: boolean) => void;
+  callbackUrl?: string;
 }
 
 export function AuthCard({
@@ -18,6 +19,7 @@ export function AuthCard({
   children,
   loading,
   setLoading,
+  callbackUrl,
 }: AuthCardProps) {
   return (
     <div className="mt-6">
@@ -34,7 +36,11 @@ export function AuthCard({
             </div>
           </div>
           <div className="flex flex-col flex-nowrap items-stretch justify-start gap-6">
-            <OAuthSignIn loading={loading} setLoading={setLoading} />
+            <OAuthSignIn
+              loading={loading}
+              setLoading={setLoading}
+              callbackUrl={callbackUrl}
+            />
 
             <div className="flex flex-row flex-nowrap items-center justify-center">
               <div className="flex h-px flex-1 flex-row items-stretch justify-start bg-[rgba(0,0,0,0.07)]"></div>

@@ -4,8 +4,15 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { SignIn } from "@/components/auth/sign-in";
 import { cn } from "@/lib/utils";
+import { loadSearchParams } from "../search-params";
 
-export default function SignInPage() {
+export default async function SignInPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const { callbackUrl } = await loadSearchParams(searchParams);
+
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-center">
       <Link
@@ -25,11 +32,11 @@ export default function SignInPage() {
           <h1 className="text-2xl font-semibold tracking-tight">
             Welcome back
           </h1>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-sm text-muted-foreground">
             Enter your email to sign in to your account
           </p>
         </div>
-        <SignIn />
+        <SignIn callbackUrl={callbackUrl ?? undefined} />
       </div>
     </div>
   );

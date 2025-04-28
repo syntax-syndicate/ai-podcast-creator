@@ -26,6 +26,7 @@ Parallax is built with modern and reliable technologies:
 - **Backend**: Node.js, Drizzle ORM, Redis, AI SDK
 - **Database**: PostgreSQL
 - **Authentication**: Better Auth, Google OAuth, Github OAuth
+- **Payment**: Polar
 
 ## Getting Started
 
