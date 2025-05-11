@@ -4,6 +4,7 @@ import * as React from "react";
 import { toast } from "sonner";
 
 import { Icons } from "@/components/icons";
+import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import type { OAuthStrategy } from "@/lib/auth-types";
 
@@ -34,7 +35,7 @@ export function OAuthSignIn({
       setLoading(true);
       await authClient.signIn.social({
         provider,
-        callbackURL: callbackUrl,
+        callbackURL: callbackUrl ?? "/studio",
       });
     } catch {
       setLoading(false);
@@ -49,9 +50,11 @@ export function OAuthSignIn({
           const Icon = Icons[provider.icon];
 
           return (
-            <button
+            <Button
               key={idx}
-              className="better-auth-outline-focus better-auth-provider-button-hover relative isolate m-0 inline-flex w-full cursor-pointer select-none items-center justify-start gap-4 rounded-[0.375rem] border-0 border-solid border-[rgba(0,0,0,0.07)] bg-[unset] px-3 py-1.5 text-[0.8125rem] font-medium leading-snug tracking-[normal] text-[rgba(0,0,0,0.62)] shadow-[rgba(0,0,0,0.07)_0px_0px_0px_1px,_rgba(0,0,0,0.08)_0px_2px_3px_-1px,rgba(0,0,0,0.02)_0px_1px_0px_0px] outline-0 transition-all duration-100"
+              variant="outline"
+              size="sm"
+              className="better-auth-outline-focus better-auth-provider-button-hover"
               onClick={() => void oauthSignin(provider.strategy)}
               disabled={loading}
             >
@@ -63,7 +66,7 @@ export function OAuthSignIn({
                   {provider.name}
                 </span>
               </span>
-            </button>
+            </Button>
           );
         })}
       </div>

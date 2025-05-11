@@ -54,7 +54,7 @@ export function AuthCard({
           </div>
         </div>
 
-        <div className="-mt-2 flex flex-col flex-nowrap items-center justify-center bg-[linear-gradient(rgba(0,0,0,0.03),rgba(0,0,0,0.03)),linear-gradient(rgb(255,255,255),rgb(255,255,255))] pt-2">
+        <div className="-mt-2 flex flex-col flex-nowrap items-center justify-center bg-[linear-gradient(rgba(0,0,0,0.03),rgba(0,0,0,0.03)),linear-gradient(rgb(255,255,255),rgb(255,255,255))] pb-2 pt-2">
           <div className="m-auto flex flex-row flex-nowrap items-stretch justify-start gap-1 px-8 py-4">
             <span className="m-0 text-[0.8125rem] font-normal leading-snug tracking-normal text-[rgb(116,118,134)]">
               {type === "signin"
@@ -67,17 +67,6 @@ export function AuthCard({
             >
               {type === "signin" ? "Sign up" : "Sign in"}
             </Link>
-          </div>
-          <div className="relative isolate w-full border-t border-[rgba(0,0,0,0.07)] px-8 py-4">
-            <div className="relative z-[1] mx-auto flex w-full flex-col items-center justify-center gap-2">
-              <div className="flex w-full flex-row flex-nowrap items-stretch justify-center">
-                <div className="flex flex-row items-center justify-center gap-1 text-[rgb(116,118,134)]">
-                  <p className="font-inherit m-0 text-[0.75rem] font-medium leading-snug tracking-normal text-inherit">
-                    Powered by Better Auth
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
