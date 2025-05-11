@@ -1,0 +1,2 @@
+CREATE INDEX "subscription_user_id_idx" ON "ai-podcast_subscription" USING btree ("user_id");--> statement-breakpoint
+CREATE INDEX "subscription_customer_id_idx" ON "ai-podcast_subscription" USING btree ("customer_id");
