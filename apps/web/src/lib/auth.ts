@@ -17,6 +17,9 @@ const polarClient = new Polar({
 });
 
 export const auth = betterAuth({
+  emailAndPassword: {
+    enabled: true,
+  },
   database: drizzleAdapter(db, {
     provider: "pg",
     schema: {
@@ -39,9 +42,127 @@ export const auth = betterAuth({
         ],
         successUrl: "/success?checkout_id={CHECKOUT_ID}",
       },
-      // webhooks: {
-      //   secret: env.POLAR_WEBHOOK_SECRET,
-      // }
+      webhooks: {
+        secret: env.POLAR_WEBHOOK_SECRET,
+
+        onPayload: async ({ data, type }) => {
+          const products: Record<string, string> = {
+            "cb4e7dfd-70ba-4175-98f4-11f00f977a4d": "pro",
+          };
+
+          switch (type) {
+            case "subscription.created": {
+              console.log(data);
+
+              const plan =
+                data.product.metadata.slug ?? products[data.productId];
+
+              const [subscription] = await db
+                .insert(schema.subscriptions)
+                .values({
+                  id: data.id,
+                  userId: data.customer.externalId as string,
+                  customerId: data.customerId,
+                  status: data.status,
+                  productId: data.productId,
+                  plan: plan as string,
+                })
+                .returning();
+
+              if (!subscription) {
+                throw new Error("[Polar Webhook]: Error creating subscription");
+              }
+
+              break;
+            }
+
+            case "subscription.updated": {
+              console.log(data);
+
+              const plan =
+                data.product.metadata.slug ?? products[data.productId];
+
+              const [subscription] = await db
+                .update(schema.subscriptions)
+                .set({
+                  status: data.status,
+                  productId: data.productId,
+                  plan: plan as string,
+                })
+                .where(eq(schema.subscriptions.id, data.id))
+                .returning();
+
+              if (!subscription) {
+                throw new Error("[Polar Webhook]: Error updating subscription");
+              }
+
+              break;
+            }
+
+            case "subscription.canceled": {
+              console.log(data);
+
+              const [subscription] = await db
+                .update(schema.subscriptions)
+                .set({
+                  status: "canceled",
+                })
+                .where(eq(schema.subscriptions.id, data.id))
+                .returning();
+
+              if (!subscription) {
+                throw new Error(
+                  "[Polar Webhook]: Error canceling subscription",
+                );
+              }
+
+              break;
+            }
+
+            case "subscription.revoked": {
+              console.log(data);
+
+              const [subscription] = await db
+                .update(schema.subscriptions)
+                .set({
+                  status: "revoked",
+                })
+                .where(eq(schema.subscriptions.id, data.id))
+                .returning();
+
+              if (!subscription) {
+                throw new Error("[Polar Webhook]: Error revoking subscription");
+              }
+
+              break;
+            }
+
+            case "subscription.uncanceled": {
+              console.log(data);
+
+              const [subscription] = await db
+                .update(schema.subscriptions)
+                .set({
+                  status: "uncanceled",
+                })
+                .where(eq(schema.subscriptions.id, data.id))
+                .returning();
+
+              if (!subscription) {
+                throw new Error(
+                  "[Polar Webhook]: Error uncanceled subscription",
+                );
+              }
+
+              break;
+            }
+
+            default: {
+              break;
+            }
+          }
+        },
+      },
     }),
     username(),
     customSession(async ({ user, session }) => {

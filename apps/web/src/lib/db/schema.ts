@@ -101,6 +101,32 @@ export const nodesRelations = relations(nodes, ({ one }) => ({
   }),
 }));
 
+// polar
+
+export const subscriptions = createTable(
+  "subscription",
+  (d) => ({
+    id: d.text().primaryKey(),
+    userId: d
+      .text()
+      .references(() => users.id)
+      .notNull(),
+    customerId: d.text().notNull(),
+    status: d.text().notNull(),
+    productId: d.text().notNull(),
+    plan: d.text().notNull(),
+    createdAt: d
+      .timestamp({ withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: d.timestamp({ withTimezone: true }).$onUpdate(() => new Date()),
+  }),
+  (t) => [
+    index("subscription_user_id_idx").on(t.userId),
+    index("subscription_customer_id_idx").on(t.customerId),
+  ],
+);
+
 // better-auth
 
 export const earlyAccess = createTable(

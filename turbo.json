@@ -26,7 +26,8 @@
         "BETTER_AUTH_TRUSTED_ORIGIN",
         "POSTHOG_API_KEY",
         "UPLOADTHING_TOKEN",
-        "POLAR_ACCESS_TOKEN"
+        "POLAR_ACCESS_TOKEN",
+        "POLAR_WEBHOOK_SECRET"
       ],
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
